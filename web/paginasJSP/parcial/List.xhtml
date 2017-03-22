@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="ParcialListForm">
+
+        <p:panel header="#{etiquetas.ListParcialTitle}">
+            <p:contextMenu id="ParcialDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{etiquetas.Create}" onclick="document.getElementById('ParcialListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{etiquetas.View}" onclick="document.getElementById('ParcialListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{etiquetas.Edit}" onclick="document.getElementById('ParcialListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{etiquetas.Delete}" onclick="document.getElementById('ParcialListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{etiquetas.ParcialMenuItem_calificacionesCollection}" icon="ui-icon-search"  action="#{parcialController.navigateCalificacionesCollection}" disabled="#{empty parcialController.selected.calificacionesCollection}" ajax="false"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{parcialController.lazyItems}"
+                         lazy="true"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{parcialController.selected}">
+                <!--
+                         To disable Lazy Loading, please copy/replace the following lines above,
+                         and be sure to replace the word HASH with the # symbol:
+                
+                         value="HASH{parcialController.items}"
+                         lazy="false"
+                         rowKey="HASH{item.idParcial}"
+                -->
+
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:ParcialDataTableContextMenu"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:ParcialDataTableContextMenu"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('ParcialListForm:viewButton').click();"/>
+                <!--
+                                <p:column sortBy="#{item.idParcial}" filterBy="#{item.idParcial}">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{etiquetas.ListParcialTitle_idParcial}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idParcial}"/>
+                                </p:column>
+                
+                -->
+                <p:column sortBy="#{item.nomParcial}" filterBy="#{item.nomParcial}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListParcialTitle_nomParcial}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nomParcial}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{etiquetas.Create}" actionListener="#{parcialController.prepareCreate}" update=":ParcialCreateForm" oncomplete="PF('ParcialCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{etiquetas.View}" update=":ParcialViewForm" oncomplete="PF('ParcialViewDialog').show()" disabled="#{empty parcialController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{etiquetas.Edit}" update=":ParcialEditForm" oncomplete="PF('ParcialEditDialog').show()" disabled="#{empty parcialController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{etiquetas.Delete}" actionListener="#{parcialController.delete}" update=":growl,datalist" disabled="#{empty parcialController.selected}">
+                <p:confirm header="#{etiquetas.ConfirmationHeader}" message="#{etiquetas.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/paginasJSP/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

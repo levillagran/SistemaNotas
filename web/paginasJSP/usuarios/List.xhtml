@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="UsuariosListForm">
+
+        <p:panel header="#{etiquetas.ListUsuariosTitle}">
+            <p:contextMenu id="UsuariosDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{etiquetas.Create}" onclick="document.getElementById('UsuariosListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{etiquetas.View}" onclick="document.getElementById('UsuariosListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{etiquetas.Edit}" onclick="document.getElementById('UsuariosListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{etiquetas.Delete}" onclick="document.getElementById('UsuariosListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{etiquetas.UsuariosMenuItem_estudianteIdEstudiante}" icon="ui-icon-search"  actionListener="#{usuariosController.prepareEstudianteIdEstudiante}" update=":EstudianteViewForm" oncomplete="PF('EstudianteViewDialog').show()" disabled="#{empty usuariosController.selected.estudianteIdEstudiante}"/>  
+                <p:menuitem value="#{etiquetas.UsuariosMenuItem_profesorIdProfesor}" icon="ui-icon-search"  actionListener="#{usuariosController.prepareProfesorIdProfesor}" update=":ProfesorViewForm" oncomplete="PF('ProfesorViewDialog').show()" disabled="#{empty usuariosController.selected.profesorIdProfesor}"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{usuariosController.lazyItems}"
+                         lazy="true"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{usuariosController.selected}">
+                <!--
+                         To disable Lazy Loading, please copy/replace the following lines above,
+                         and be sure to replace the word HASH with the # symbol:
+                
+                         value="HASH{usuariosController.items}"
+                         lazy="false"
+                         rowKey="HASH{item.id}"
+                -->
+
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:UsuariosDataTableContextMenu" listener="#{usuariosController.resetParents}"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:UsuariosDataTableContextMenu" listener="#{usuariosController.resetParents}"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{usuariosController.resetParents}"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('UsuariosListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.id}" filterBy="#{item.id}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListUsuariosTitle_id}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.id}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.usuario}" filterBy="#{item.usuario}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListUsuariosTitle_usuario}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.usuario}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.clave}" filterBy="#{item.clave}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListUsuariosTitle_clave}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.clave}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.nivelAcceso}" filterBy="#{item.nivelAcceso}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListUsuariosTitle_nivelAcceso}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nivelAcceso}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.fechaEgistro}" filterBy="#{item.fechaEgistro}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListUsuariosTitle_fechaEgistro}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.fechaEgistro}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                </p:column>
+
+
+                <p:column sortBy="#{item.estudianteIdEstudiante.idEstudiante}" filterBy="#{item.estudianteIdEstudiante.idEstudiante}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListUsuariosTitle_estudianteIdEstudiante}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.estudianteIdEstudiante.nomEstudiante}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.profesorIdProfesor.idProfesor}" filterBy="#{item.profesorIdProfesor.idProfesor}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListUsuariosTitle_profesorIdProfesor}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.profesorIdProfesor.nomProfesor}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{etiquetas.Create}" actionListener="#{usuariosController.prepareCreate}" update=":UsuariosCreateForm" oncomplete="PF('UsuariosCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{etiquetas.View}" update=":UsuariosViewForm" oncomplete="PF('UsuariosViewDialog').show()" disabled="#{empty usuariosController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{etiquetas.Edit}" update=":UsuariosEditForm" oncomplete="PF('UsuariosEditDialog').show()" disabled="#{empty usuariosController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{etiquetas.Delete}" actionListener="#{usuariosController.delete}" update=":growl,datalist" disabled="#{empty usuariosController.selected}">
+                <p:confirm header="#{etiquetas.ConfirmationHeader}" message="#{etiquetas.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/paginasJSP/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

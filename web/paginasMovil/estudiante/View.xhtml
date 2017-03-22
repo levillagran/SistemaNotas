@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="EstudianteViewPage" lazy="true">
+        <pm:header title="#{etiquetas.ViewEstudianteTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{etiquetas.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:EstudianteListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="EstudianteViewForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{estudianteController.selected != null}">
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewEstudianteLabel_idEstudiante}"/>
+                            <h:outputText value="#{estudianteController.selected.idEstudiante}" title="#{etiquetas.ViewEstudianteTitle_idEstudiante}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewEstudianteLabel_nomEstudiante}"/>
+                            <h:outputText value="#{estudianteController.selected.nomEstudiante}" title="#{etiquetas.ViewEstudianteTitle_nomEstudiante}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewEstudianteLabel_numTelefono}"/>
+                            <h:outputText value="#{estudianteController.selected.numTelefono}" title="#{etiquetas.ViewEstudianteTitle_numTelefono}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewEstudianteLabel_email}"/>
+                            <h:outputText value="#{estudianteController.selected.email}" title="#{etiquetas.ViewEstudianteTitle_email}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewEstudianteLabel_fechaNacimiento}"/>
+                            <h:outputText value="#{estudianteController.selected.fechaNacimiento}" title="#{etiquetas.ViewEstudianteTitle_fechaNacimiento}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewEstudianteLabel_lugarNacimiento}"/>
+                            <h:outputText value="#{estudianteController.selected.lugarNacimiento}" title="#{etiquetas.ViewEstudianteTitle_lugarNacimiento}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewEstudianteLabel_plantelAnterior}"/>
+                            <h:outputText value="#{estudianteController.selected.plantelAnterior}" title="#{etiquetas.ViewEstudianteTitle_plantelAnterior}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewEstudianteLabel_cursoAnterior}"/>
+                            <h:outputText value="#{estudianteController.selected.cursoAnterior}" title="#{etiquetas.ViewEstudianteTitle_cursoAnterior}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewEstudianteLabel_direccionDomicilio}"/>
+                            <h:outputText value="#{estudianteController.selected.direccionDomicilio}" title="#{etiquetas.ViewEstudianteTitle_direccionDomicilio}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewEstudianteLabel_documentosIdDocumento}"/>
+                            <h:outputText value="#{estudianteController.selected.documentosIdDocumento.idDocumentos}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewEstudianteLabel_padresTutoresIdPadresTutores}"/>
+                            <h:outputText value="#{estudianteController.selected.padresTutoresIdPadresTutores.idPadresTutores}"/>
+                        </pm:field>
+                    </p:outputPanel>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

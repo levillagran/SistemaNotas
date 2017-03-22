@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="EstudianteListForm">
+
+        <p:panel header="#{etiquetas.ListEstudianteTitle}">
+            <p:contextMenu id="EstudianteDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{etiquetas.Create}" onclick="document.getElementById('EstudianteListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{etiquetas.View}" onclick="document.getElementById('EstudianteListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{etiquetas.Edit}" onclick="document.getElementById('EstudianteListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{etiquetas.Delete}" onclick="document.getElementById('EstudianteListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{etiquetas.EstudianteMenuItem_documentosIdDocumento}" icon="ui-icon-search"  actionListener="#{estudianteController.prepareDocumentosIdDocumento}" update=":DocumentosViewForm" oncomplete="PF('DocumentosViewDialog').show()" disabled="#{empty estudianteController.selected.documentosIdDocumento}"/>  
+                <p:menuitem value="#{etiquetas.EstudianteMenuItem_padresTutoresIdPadresTutores}" icon="ui-icon-search"  actionListener="#{estudianteController.preparePadresTutoresIdPadresTutores}" update=":PadresTutoresViewForm" oncomplete="PF('PadresTutoresViewDialog').show()" disabled="#{empty estudianteController.selected.padresTutoresIdPadresTutores}"/>  
+                <p:menuitem value="#{etiquetas.EstudianteMenuItem_usuariosCollection}" icon="ui-icon-search"  action="#{estudianteController.navigateUsuariosCollection}" disabled="#{empty estudianteController.selected.usuariosCollection}" ajax="false"/>  
+                <p:menuitem value="#{etiquetas.EstudianteMenuItem_calificacionesCollection}" icon="ui-icon-search"  action="#{estudianteController.navigateCalificacionesCollection}" disabled="#{empty estudianteController.selected.calificacionesCollection}" ajax="false"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{estudianteController.lazyItems}"
+                         lazy="true"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{estudianteController.selected}">
+                <!--
+                         To disable Lazy Loading, please copy/replace the following lines above,
+                         and be sure to replace the word HASH with the # symbol:
+                
+                         value="HASH{estudianteController.items}"
+                         lazy="false"
+                         rowKey="HASH{item.idEstudiante}"
+                -->
+
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:EstudianteDataTableContextMenu" listener="#{estudianteController.resetParents}"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:EstudianteDataTableContextMenu" listener="#{estudianteController.resetParents}"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{estudianteController.resetParents}"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('EstudianteListForm:viewButton').click();"/>
+                <!--
+                                <p:column sortBy="#{item.idEstudiante}" filterBy="#{item.idEstudiante}">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{etiquetas.ListEstudianteTitle_idEstudiante}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idEstudiante}"/>
+                                </p:column>
+                -->
+
+                <p:column sortBy="#{item.nomEstudiante}" filterBy="#{item.nomEstudiante}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListEstudianteTitle_nomEstudiante}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nomEstudiante}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.numTelefono}" filterBy="#{item.numTelefono}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListEstudianteTitle_numTelefono}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.numTelefono}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.email}" filterBy="#{item.email}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListEstudianteTitle_email}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.email}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.fechaNacimiento}" filterBy="#{item.fechaNacimiento}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListEstudianteTitle_fechaNacimiento}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.fechaNacimiento}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                </p:column>
+
+
+                <p:column sortBy="#{item.lugarNacimiento}" filterBy="#{item.lugarNacimiento}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListEstudianteTitle_lugarNacimiento}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.lugarNacimiento}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.plantelAnterior}" filterBy="#{item.plantelAnterior}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListEstudianteTitle_plantelAnterior}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.plantelAnterior}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.cursoAnterior}" filterBy="#{item.cursoAnterior}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListEstudianteTitle_cursoAnterior}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.cursoAnterior}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.direccionDomicilio}" filterBy="#{item.direccionDomicilio}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListEstudianteTitle_direccionDomicilio}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.direccionDomicilio}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.documentosIdDocumento.idDocumentos}" filterBy="#{item.documentosIdDocumento.idDocumentos}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListEstudianteTitle_documentosIdDocumento}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.documentosIdDocumento.idDocumentos}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.padresTutoresIdPadresTutores.idPadresTutores}" filterBy="#{item.padresTutoresIdPadresTutores.idPadresTutores}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListEstudianteTitle_padresTutoresIdPadresTutores}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.padresTutoresIdPadresTutores.nombre}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{etiquetas.Create}" actionListener="#{estudianteController.prepareCreate}" update=":EstudianteCreateForm" oncomplete="PF('EstudianteCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{etiquetas.View}" update=":EstudianteViewForm" oncomplete="PF('EstudianteViewDialog').show()" disabled="#{empty estudianteController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{etiquetas.Edit}" update=":EstudianteEditForm" oncomplete="PF('EstudianteEditDialog').show()" disabled="#{empty estudianteController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{etiquetas.Delete}" actionListener="#{estudianteController.delete}" update=":growl,datalist" disabled="#{empty estudianteController.selected}">
+                <p:confirm header="#{etiquetas.ConfirmationHeader}" message="#{etiquetas.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/paginasJSP/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="ParcialEditPage" lazy="true">
+        <pm:header title="#{etiquetas.EditParcialTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{etiquetas.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:ParcialListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="ParcialEditForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{parcialController.selected != null}">
+
+                        <pm:field>
+                            <h:outputLabel value="#{etiquetas.EditParcialLabel_idParcial}" for="idParcial" />
+                            <h:panelGroup>
+                                <h:outputText id="idParcial" value="#{parcialController.selected.idParcial}" />
+                                <p:tooltip for="idParcial" value="#{parcialController.getComponentMessages('idParcial', etiquetas.EditParcialHelpText_idParcial)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditParcialLabel_nomParcial}" for="nomParcial" />
+                            <h:panelGroup>
+                                <p:inputText id="nomParcial" value="#{parcialController.selected.nomParcial}" title="#{etiquetas.EditParcialTitle_nomParcial}" required="true" requiredMessage="#{etiquetas.EditParcialRequiredMessage_nomParcial}" size="15" maxlength="15"/>
+                                <p:tooltip for="nomParcial" value="#{parcialController.getComponentMessages('nomParcial', etiquetas.EditParcialHelpText_nomParcial)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{parcialController.save}" value="#{etiquetas.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:ParcialListPage:ParcialListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:ParcialListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

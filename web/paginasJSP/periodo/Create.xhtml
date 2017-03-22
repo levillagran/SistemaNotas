@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PeriodoCreateDlg" widgetVar="PeriodoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{etiquetas.CreatePeriodoTitle}" closeOnEscape="true">
+
+            <h:form id="PeriodoCreateForm">
+
+                <h:panelGroup id="display" rendered="#{periodoController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{etiquetas.CreatePeriodoLabel_nomPeriodo}" for="nomPeriodo" />
+                        <h:panelGroup>
+                            <p:inputText id="nomPeriodo" value="#{periodoController.selected.nomPeriodo}" title="#{etiquetas.CreatePeriodoTitle_nomPeriodo}" required="true" requiredMessage="#{etiquetas.CreatePeriodoRequiredMessage_nomPeriodo}" size="15" maxlength="15"/>
+                            <p:tooltip for="nomPeriodo" value="#{periodoController.getComponentMessages('nomPeriodo', etiquetas.CreatePeriodoHelpText_nomPeriodo)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.CreatePeriodoLabel_fechaInicio}" for="fechaInicio" />
+                        <h:panelGroup>
+                            <p:calendar id="fechaInicio" pattern="MM/dd/yyyy" value="#{periodoController.selected.fechaInicio}" title="#{etiquetas.CreatePeriodoTitle_fechaInicio}"  showOn="button"/>
+                            <p:tooltip for="fechaInicio" value="#{periodoController.getComponentMessages('fechaInicio', etiquetas.CreatePeriodoHelpText_fechaInicio)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.CreatePeriodoLabel_fechaFin}" for="fechaFin" />
+                        <h:panelGroup>
+                            <p:calendar id="fechaFin" pattern="MM/dd/yyyy" value="#{periodoController.selected.fechaFin}" title="#{etiquetas.CreatePeriodoTitle_fechaFin}"  showOn="button"/>
+                            <p:tooltip for="fechaFin" value="#{periodoController.getComponentMessages('fechaFin', etiquetas.CreatePeriodoHelpText_fechaFin)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{periodoController.saveNew}" value="#{etiquetas.Save}" update="display,:PeriodoListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('PeriodoCreateDialog'));">
+                        <p:confirm header="#{etiquetas.ConfirmationHeader}" message="#{etiquetas.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{etiquetas.Cancel}" oncomplete="PF('PeriodoCreateDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

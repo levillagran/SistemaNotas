@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="AsignaturasCreatePage" lazy="true">
+        <pm:header title="#{etiquetas.CreateAsignaturasTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{etiquetas.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:AsignaturasListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="AsignaturasCreateForm">
+
+                <h:panelGroup id="display" rendered="#{asignaturasController.selected != null}">
+                    <p:outputPanel>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.CreateAsignaturasLabel_nomAsignatura}" for="nomAsignatura" />
+                            <h:panelGroup>
+                                <p:inputText id="nomAsignatura" value="#{asignaturasController.selected.nomAsignatura}" title="#{etiquetas.CreateAsignaturasTitle_nomAsignatura}" required="true" requiredMessage="#{etiquetas.CreateAsignaturasRequiredMessage_nomAsignatura}" size="30" maxlength="30"/>
+                                <p:tooltip for="nomAsignatura" value="#{asignaturasController.getComponentMessages('nomAsignatura', etiquetas.CreateAsignaturasHelpText_nomAsignatura)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{asignaturasController.saveNew}" value="#{etiquetas.Save}" update="display,:AsignaturasListPage:AsignaturasListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:AsignaturasListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

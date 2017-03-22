@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UsuariosCreateDlg" widgetVar="UsuariosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{etiquetas.CreateUsuariosTitle}" closeOnEscape="true">
+
+            <h:form id="UsuariosCreateForm">
+
+                <h:panelGroup id="display" rendered="#{usuariosController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{etiquetas.CreateUsuariosLabel_usuario}" for="usuario" />
+                        <h:panelGroup>
+                            <p:inputText id="usuario" value="#{usuariosController.selected.usuario}" title="#{etiquetas.CreateUsuariosTitle_usuario}" required="true" requiredMessage="#{etiquetas.CreateUsuariosRequiredMessage_usuario}" size="45" maxlength="45"/>
+                            <p:tooltip for="usuario" value="#{usuariosController.getComponentMessages('usuario', etiquetas.CreateUsuariosHelpText_usuario)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.CreateUsuariosLabel_clave}" for="clave" />
+                        <h:panelGroup>
+                            <p:inputText id="clave" value="#{usuariosController.selected.clave}" title="#{etiquetas.CreateUsuariosTitle_clave}" required="true" requiredMessage="#{etiquetas.CreateUsuariosRequiredMessage_clave}" size="45" maxlength="45"/>
+                            <p:tooltip for="clave" value="#{usuariosController.getComponentMessages('clave', etiquetas.CreateUsuariosHelpText_clave)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.CreateUsuariosLabel_nivelAcceso}" for="nivelAcceso" />
+                        <h:panelGroup>
+                            <p:inputText id="nivelAcceso" value="#{usuariosController.selected.nivelAcceso}" title="#{etiquetas.CreateUsuariosTitle_nivelAcceso}" required="true" requiredMessage="#{etiquetas.CreateUsuariosRequiredMessage_nivelAcceso}"/>
+                            <p:tooltip for="nivelAcceso" value="#{usuariosController.getComponentMessages('nivelAcceso', etiquetas.CreateUsuariosHelpText_nivelAcceso)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.CreateUsuariosLabel_fechaEgistro}" for="fechaEgistro" />
+                        <h:panelGroup>
+                            <p:calendar id="fechaEgistro" pattern="MM/dd/yyyy" value="#{usuariosController.selected.fechaEgistro}" title="#{etiquetas.CreateUsuariosTitle_fechaEgistro}" required="true" requiredMessage="#{etiquetas.CreateUsuariosRequiredMessage_fechaEgistro}" showOn="button"/>
+                            <p:tooltip for="fechaEgistro" value="#{usuariosController.getComponentMessages('fechaEgistro', etiquetas.CreateUsuariosHelpText_fechaEgistro)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.CreateUsuariosLabel_estudianteIdEstudiante}" for="estudianteIdEstudiante" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="estudianteIdEstudiante" value="#{usuariosController.selected.estudianteIdEstudiante}"  converter="estudianteConverter">
+                                <f:selectItem itemLabel="#{etiquetas.SelectOneMessage}"/>
+                                <f:selectItems value="#{estudianteController.items}"
+                                               var="estudianteIdEstudianteItem"
+                                               itemValue="#{estudianteIdEstudianteItem}"
+                                               itemLabel="#{estudianteIdEstudianteItem.nomEstudiante.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                            <p:tooltip for="estudianteIdEstudiante" value="#{usuariosController.getComponentMessages('estudianteIdEstudiante', etiquetas.CreateUsuariosHelpText_estudianteIdEstudiante)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.CreateUsuariosLabel_profesorIdProfesor}" for="profesorIdProfesor" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="profesorIdProfesor" value="#{usuariosController.selected.profesorIdProfesor}"  converter="profesorConverter">
+                                <f:selectItem itemLabel="#{etiquetas.SelectOneMessage}"/>
+                                <f:selectItems value="#{profesorController.items}"
+                                               var="profesorIdProfesorItem"
+                                               itemValue="#{profesorIdProfesorItem}"
+                                               itemLabel="#{profesorIdProfesorItem.nomProfesor.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                            <p:tooltip for="profesorIdProfesor" value="#{usuariosController.getComponentMessages('profesorIdProfesor', etiquetas.CreateUsuariosHelpText_profesorIdProfesor)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{usuariosController.saveNew}" value="#{etiquetas.Save}" update="display,:UsuariosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('UsuariosCreateDialog'));">
+                        <p:confirm header="#{etiquetas.ConfirmationHeader}" message="#{etiquetas.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{etiquetas.Cancel}" oncomplete="PF('UsuariosCreateDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

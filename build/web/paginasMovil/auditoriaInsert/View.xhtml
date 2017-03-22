@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="AuditoriaInsertViewPage" lazy="true">
+        <pm:header title="#{etiquetas.ViewAuditoriaInsertTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{etiquetas.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:AuditoriaInsertListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="AuditoriaInsertViewForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{auditoriaInsertController.selected != null}">
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewAuditoriaInsertLabel_idAuditoria}"/>
+                            <h:outputText value="#{auditoriaInsertController.selected.idAuditoria}" title="#{etiquetas.ViewAuditoriaInsertTitle_idAuditoria}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewAuditoriaInsertLabel_idCalificacion}"/>
+                            <h:outputText value="#{auditoriaInsertController.selected.idCalificacion}" title="#{etiquetas.ViewAuditoriaInsertTitle_idCalificacion}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewAuditoriaInsertLabel_fechaInsert}"/>
+                            <h:outputText value="#{auditoriaInsertController.selected.fechaInsert}" title="#{etiquetas.ViewAuditoriaInsertTitle_fechaInsert}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewAuditoriaInsertLabel_hora}"/>
+                            <h:outputText value="#{auditoriaInsertController.selected.hora}" title="#{etiquetas.ViewAuditoriaInsertTitle_hora}">
+                                <f:convertDateTime pattern="HH:mm:ss" />
+                            </h:outputText>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewAuditoriaInsertLabel_usuario}"/>
+                            <h:outputText value="#{auditoriaInsertController.selected.usuario}" title="#{etiquetas.ViewAuditoriaInsertTitle_usuario}"/>
+                        </pm:field>
+                    </p:outputPanel>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

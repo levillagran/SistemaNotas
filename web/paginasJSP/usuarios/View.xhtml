@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UsuariosViewDlg" widgetVar="UsuariosViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{etiquetas.ViewUsuariosTitle}" closeOnEscape="true">
+
+            <h:form id="UsuariosViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{usuariosController.selected != null}">
+
+                        <h:outputText value="#{etiquetas.ViewUsuariosLabel_id}"/>
+                        <h:outputText value="#{usuariosController.selected.id}" title="#{etiquetas.ViewUsuariosTitle_id}"/>
+
+                        <h:outputText value="#{etiquetas.ViewUsuariosLabel_usuario}"/>
+                        <h:outputText value="#{usuariosController.selected.usuario}" title="#{etiquetas.ViewUsuariosTitle_usuario}"/>
+
+                        <h:outputText value="#{etiquetas.ViewUsuariosLabel_clave}"/>
+                        <h:outputText value="#{usuariosController.selected.clave}" title="#{etiquetas.ViewUsuariosTitle_clave}"/>
+
+                        <h:outputText value="#{etiquetas.ViewUsuariosLabel_nivelAcceso}"/>
+                        <h:outputText value="#{usuariosController.selected.nivelAcceso}" title="#{etiquetas.ViewUsuariosTitle_nivelAcceso}"/>
+
+                        <h:outputText value="#{etiquetas.ViewUsuariosLabel_fechaEgistro}"/>
+                        <h:outputText value="#{usuariosController.selected.fechaEgistro}" title="#{etiquetas.ViewUsuariosTitle_fechaEgistro}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+
+                        <h:outputText value="#{etiquetas.ViewUsuariosLabel_estudianteIdEstudiante}"/>
+                        <h:outputText value="#{usuariosController.selected.estudianteIdEstudiante.idEstudiante}"/>
+
+                        <h:outputText value="#{etiquetas.ViewUsuariosLabel_profesorIdProfesor}"/>
+                        <h:outputText value="#{usuariosController.selected.profesorIdProfesor.idProfesor}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{etiquetas.Close}" onclick="PF('UsuariosViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

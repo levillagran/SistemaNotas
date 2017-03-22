@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="UsuariosEditDlg" widgetVar="UsuariosEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{etiquetas.EditUsuariosTitle}" closeOnEscape="true">
+
+            <h:form id="UsuariosEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{usuariosController.selected != null}">
+
+
+                        <h:outputLabel value="#{etiquetas.EditUsuariosLabel_id}" for="id" />
+                        <h:panelGroup>
+                            <h:outputText id="id" value="#{usuariosController.selected.id}" />
+                            <p:tooltip for="id" value="#{usuariosController.getComponentMessages('id', etiquetas.EditUsuariosHelpText_id)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.EditUsuariosLabel_usuario}" for="usuario" />
+                        <h:panelGroup>
+                            <p:inputText id="usuario" value="#{usuariosController.selected.usuario}" title="#{etiquetas.EditUsuariosTitle_usuario}" required="true" requiredMessage="#{etiquetas.EditUsuariosRequiredMessage_usuario}" size="45" maxlength="45"/>
+                            <p:tooltip for="usuario" value="#{usuariosController.getComponentMessages('usuario', etiquetas.EditUsuariosHelpText_usuario)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.EditUsuariosLabel_clave}" for="clave" />
+                        <h:panelGroup>
+                            <p:inputText id="clave" value="#{usuariosController.selected.clave}" title="#{etiquetas.EditUsuariosTitle_clave}" required="true" requiredMessage="#{etiquetas.EditUsuariosRequiredMessage_clave}" size="45" maxlength="45"/>
+                            <p:tooltip for="clave" value="#{usuariosController.getComponentMessages('clave', etiquetas.EditUsuariosHelpText_clave)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.EditUsuariosLabel_nivelAcceso}" for="nivelAcceso" />
+                        <h:panelGroup>
+                            <p:inputText id="nivelAcceso" value="#{usuariosController.selected.nivelAcceso}" title="#{etiquetas.EditUsuariosTitle_nivelAcceso}" required="true" requiredMessage="#{etiquetas.EditUsuariosRequiredMessage_nivelAcceso}"/>
+                            <p:tooltip for="nivelAcceso" value="#{usuariosController.getComponentMessages('nivelAcceso', etiquetas.EditUsuariosHelpText_nivelAcceso)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.EditUsuariosLabel_fechaEgistro}" for="fechaEgistro" />
+                        <h:panelGroup>
+                            <p:calendar id="fechaEgistro" pattern="MM/dd/yyyy" value="#{usuariosController.selected.fechaEgistro}" title="#{etiquetas.EditUsuariosTitle_fechaEgistro}" required="true" requiredMessage="#{etiquetas.EditUsuariosRequiredMessage_fechaEgistro}" showOn="button"/>
+                            <p:tooltip for="fechaEgistro" value="#{usuariosController.getComponentMessages('fechaEgistro', etiquetas.EditUsuariosHelpText_fechaEgistro)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.EditUsuariosLabel_estudianteIdEstudiante}" for="estudianteIdEstudiante" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="estudianteIdEstudiante" value="#{usuariosController.selected.estudianteIdEstudiante}"  converter="estudianteConverter">
+                                <f:selectItem itemLabel="#{etiquetas.SelectOneMessage}"/>
+                                <f:selectItems value="#{estudianteController.items}"
+                                               var="estudianteIdEstudianteItem"
+                                               itemValue="#{estudianteIdEstudianteItem}"
+                                               itemLabel="#{estudianteIdEstudianteItem.nomEstudiante.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                            <p:tooltip for="estudianteIdEstudiante" value="#{usuariosController.getComponentMessages('estudianteIdEstudiante', etiquetas.EditUsuariosHelpText_estudianteIdEstudiante)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.EditUsuariosLabel_profesorIdProfesor}" for="profesorIdProfesor" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="profesorIdProfesor" value="#{usuariosController.selected.profesorIdProfesor}"  converter="profesorConverter">
+                                <f:selectItem itemLabel="#{etiquetas.SelectOneMessage}"/>
+                                <f:selectItems value="#{profesorController.items}"
+                                               var="profesorIdProfesorItem"
+                                               itemValue="#{profesorIdProfesorItem}"
+                                               itemLabel="#{profesorIdProfesorItem.nomProfesor.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                            <p:tooltip for="profesorIdProfesor" value="#{usuariosController.getComponentMessages('profesorIdProfesor', etiquetas.EditUsuariosHelpText_profesorIdProfesor)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{usuariosController.save}" value="#{etiquetas.Save}" update="display,:UsuariosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('UsuariosEditDialog'));">
+                        <p:confirm header="#{etiquetas.ConfirmationHeader}" message="#{etiquetas.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{etiquetas.Cancel}" oncomplete="PF('UsuariosEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

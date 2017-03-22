@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="DocumentosEditDlg" widgetVar="DocumentosEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{etiquetas.EditDocumentosTitle}" closeOnEscape="true">
+
+            <h:form id="DocumentosEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{documentosController.selected != null}">
+
+
+                        <h:outputLabel value="#{etiquetas.EditDocumentosLabel_idDocumentos}" for="idDocumentos" />
+                        <h:panelGroup>
+                            <h:outputText id="idDocumentos" value="#{documentosController.selected.idDocumentos}" />
+                            <p:tooltip for="idDocumentos" value="#{documentosController.getComponentMessages('idDocumentos', etiquetas.EditDocumentosHelpText_idDocumentos)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.EditDocumentosLabel_certificadoMedico}" for="certificadoMedico" />
+                        <h:panelGroup>
+                            <p:inputText id="certificadoMedico" value="#{documentosController.selected.certificadoMedico}" title="#{etiquetas.EditDocumentosTitle_certificadoMedico}" size="150" maxlength="150"/>
+                            <p:tooltip for="certificadoMedico" value="#{documentosController.getComponentMessages('certificadoMedico', etiquetas.EditDocumentosHelpText_certificadoMedico)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.EditDocumentosLabel_libretaCalificaciones}" for="libretaCalificaciones" />
+                        <h:panelGroup>
+                            <p:inputText id="libretaCalificaciones" value="#{documentosController.selected.libretaCalificaciones}" title="#{etiquetas.EditDocumentosTitle_libretaCalificaciones}" size="150" maxlength="150"/>
+                            <p:tooltip for="libretaCalificaciones" value="#{documentosController.getComponentMessages('libretaCalificaciones', etiquetas.EditDocumentosHelpText_libretaCalificaciones)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.EditDocumentosLabel_comprobanteDeposito}" for="comprobanteDeposito" />
+                        <h:panelGroup>
+                            <p:inputText id="comprobanteDeposito" value="#{documentosController.selected.comprobanteDeposito}" title="#{etiquetas.EditDocumentosTitle_comprobanteDeposito}" size="150" maxlength="150"/>
+                            <p:tooltip for="comprobanteDeposito" value="#{documentosController.getComponentMessages('comprobanteDeposito', etiquetas.EditDocumentosHelpText_comprobanteDeposito)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.EditDocumentosLabel_promocionesLegalizadas}" for="promocionesLegalizadas" />
+                        <h:panelGroup>
+                            <p:inputText id="promocionesLegalizadas" value="#{documentosController.selected.promocionesLegalizadas}" title="#{etiquetas.EditDocumentosTitle_promocionesLegalizadas}" size="150" maxlength="150"/>
+                            <p:tooltip for="promocionesLegalizadas" value="#{documentosController.getComponentMessages('promocionesLegalizadas', etiquetas.EditDocumentosHelpText_promocionesLegalizadas)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.EditDocumentosLabel_copiaCedula}" for="copiaCedula" />
+                        <h:panelGroup>
+                            <p:inputText id="copiaCedula" value="#{documentosController.selected.copiaCedula}" title="#{etiquetas.EditDocumentosTitle_copiaCedula}" size="150" maxlength="150"/>
+                            <p:tooltip for="copiaCedula" value="#{documentosController.getComponentMessages('copiaCedula', etiquetas.EditDocumentosHelpText_copiaCedula)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.EditDocumentosLabel_foto}" for="foto" />
+                        <h:panelGroup>
+                            <p:inputText id="foto" value="#{documentosController.selected.foto}" title="#{etiquetas.EditDocumentosTitle_foto}" size="150" maxlength="150"/>
+                            <p:tooltip for="foto" value="#{documentosController.getComponentMessages('foto', etiquetas.EditDocumentosHelpText_foto)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{documentosController.save}" value="#{etiquetas.Save}" update="display,:DocumentosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('DocumentosEditDialog'));">
+                        <p:confirm header="#{etiquetas.ConfirmationHeader}" message="#{etiquetas.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{etiquetas.Cancel}" oncomplete="PF('DocumentosEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

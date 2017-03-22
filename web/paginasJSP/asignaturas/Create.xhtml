@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AsignaturasCreateDlg" widgetVar="AsignaturasCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{etiquetas.CreateAsignaturasTitle}" closeOnEscape="true">
+
+            <h:form id="AsignaturasCreateForm">
+
+                <h:panelGroup id="display" rendered="#{asignaturasController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{etiquetas.CreateAsignaturasLabel_nomAsignatura}" for="nomAsignatura" />
+                        <h:panelGroup>
+                            <p:inputText id="nomAsignatura" value="#{asignaturasController.selected.nomAsignatura}" title="#{etiquetas.CreateAsignaturasTitle_nomAsignatura}" required="true" requiredMessage="#{etiquetas.CreateAsignaturasRequiredMessage_nomAsignatura}" size="30" maxlength="30"/>
+                            <p:tooltip for="nomAsignatura" value="#{asignaturasController.getComponentMessages('nomAsignatura', etiquetas.CreateAsignaturasHelpText_nomAsignatura)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{asignaturasController.saveNew}" value="#{etiquetas.Save}" update="display,:AsignaturasListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('AsignaturasCreateDialog'));">
+                        <p:confirm header="#{etiquetas.ConfirmationHeader}" message="#{etiquetas.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{etiquetas.Cancel}" oncomplete="PF('AsignaturasCreateDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

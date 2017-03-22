@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="ProfesorEditPage" lazy="true">
+        <pm:header title="#{etiquetas.EditProfesorTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{etiquetas.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:ProfesorListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="ProfesorEditForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{profesorController.selected != null}">
+
+                        <pm:field>
+                            <h:outputLabel value="#{etiquetas.EditProfesorLabel_idProfesor}" for="idProfesor" />
+                            <h:panelGroup>
+                                <h:outputText id="idProfesor" value="#{profesorController.selected.idProfesor}" />
+                                <p:tooltip for="idProfesor" value="#{profesorController.getComponentMessages('idProfesor', etiquetas.EditProfesorHelpText_idProfesor)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditProfesorLabel_nomProfesor}" for="nomProfesor" />
+                            <h:panelGroup>
+                                <p:inputText id="nomProfesor" value="#{profesorController.selected.nomProfesor}" title="#{etiquetas.EditProfesorTitle_nomProfesor}" required="true" requiredMessage="#{etiquetas.EditProfesorRequiredMessage_nomProfesor}" size="45" maxlength="45"/>
+                                <p:tooltip for="nomProfesor" value="#{profesorController.getComponentMessages('nomProfesor', etiquetas.EditProfesorHelpText_nomProfesor)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{profesorController.save}" value="#{etiquetas.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:ProfesorListPage:ProfesorListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:ProfesorListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProfesorCreateDlg" widgetVar="ProfesorCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{etiquetas.CreateProfesorTitle}" closeOnEscape="true">
+
+            <h:form id="ProfesorCreateForm">
+
+                <h:panelGroup id="display" rendered="#{profesorController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{etiquetas.CreateProfesorLabel_nomProfesor}" for="nomProfesor" />
+                        <h:panelGroup>
+                            <p:inputText id="nomProfesor" value="#{profesorController.selected.nomProfesor}" title="#{etiquetas.CreateProfesorTitle_nomProfesor}" required="true" requiredMessage="#{etiquetas.CreateProfesorRequiredMessage_nomProfesor}" size="45" maxlength="45"/>
+                            <p:tooltip for="nomProfesor" value="#{profesorController.getComponentMessages('nomProfesor', etiquetas.CreateProfesorHelpText_nomProfesor)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{profesorController.saveNew}" value="#{etiquetas.Save}" update="display,:ProfesorListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('ProfesorCreateDialog'));">
+                        <p:confirm header="#{etiquetas.ConfirmationHeader}" message="#{etiquetas.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{etiquetas.Cancel}" oncomplete="PF('ProfesorCreateDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

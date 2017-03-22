@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="DocumentosEditPage" lazy="true">
+        <pm:header title="#{etiquetas.EditDocumentosTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{etiquetas.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:DocumentosListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="DocumentosEditForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{documentosController.selected != null}">
+
+                        <pm:field>
+                            <h:outputLabel value="#{etiquetas.EditDocumentosLabel_idDocumentos}" for="idDocumentos" />
+                            <h:panelGroup>
+                                <h:outputText id="idDocumentos" value="#{documentosController.selected.idDocumentos}" />
+                                <p:tooltip for="idDocumentos" value="#{documentosController.getComponentMessages('idDocumentos', etiquetas.EditDocumentosHelpText_idDocumentos)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditDocumentosLabel_certificadoMedico}" for="certificadoMedico" />
+                            <h:panelGroup>
+                                <p:inputText id="certificadoMedico" value="#{documentosController.selected.certificadoMedico}" title="#{etiquetas.EditDocumentosTitle_certificadoMedico}" size="150" maxlength="150"/>
+                                <p:tooltip for="certificadoMedico" value="#{documentosController.getComponentMessages('certificadoMedico', etiquetas.EditDocumentosHelpText_certificadoMedico)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditDocumentosLabel_libretaCalificaciones}" for="libretaCalificaciones" />
+                            <h:panelGroup>
+                                <p:inputText id="libretaCalificaciones" value="#{documentosController.selected.libretaCalificaciones}" title="#{etiquetas.EditDocumentosTitle_libretaCalificaciones}" size="150" maxlength="150"/>
+                                <p:tooltip for="libretaCalificaciones" value="#{documentosController.getComponentMessages('libretaCalificaciones', etiquetas.EditDocumentosHelpText_libretaCalificaciones)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditDocumentosLabel_comprobanteDeposito}" for="comprobanteDeposito" />
+                            <h:panelGroup>
+                                <p:inputText id="comprobanteDeposito" value="#{documentosController.selected.comprobanteDeposito}" title="#{etiquetas.EditDocumentosTitle_comprobanteDeposito}" size="150" maxlength="150"/>
+                                <p:tooltip for="comprobanteDeposito" value="#{documentosController.getComponentMessages('comprobanteDeposito', etiquetas.EditDocumentosHelpText_comprobanteDeposito)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditDocumentosLabel_promocionesLegalizadas}" for="promocionesLegalizadas" />
+                            <h:panelGroup>
+                                <p:inputText id="promocionesLegalizadas" value="#{documentosController.selected.promocionesLegalizadas}" title="#{etiquetas.EditDocumentosTitle_promocionesLegalizadas}" size="150" maxlength="150"/>
+                                <p:tooltip for="promocionesLegalizadas" value="#{documentosController.getComponentMessages('promocionesLegalizadas', etiquetas.EditDocumentosHelpText_promocionesLegalizadas)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditDocumentosLabel_copiaCedula}" for="copiaCedula" />
+                            <h:panelGroup>
+                                <p:inputText id="copiaCedula" value="#{documentosController.selected.copiaCedula}" title="#{etiquetas.EditDocumentosTitle_copiaCedula}" size="150" maxlength="150"/>
+                                <p:tooltip for="copiaCedula" value="#{documentosController.getComponentMessages('copiaCedula', etiquetas.EditDocumentosHelpText_copiaCedula)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditDocumentosLabel_foto}" for="foto" />
+                            <h:panelGroup>
+                                <p:inputText id="foto" value="#{documentosController.selected.foto}" title="#{etiquetas.EditDocumentosTitle_foto}" size="150" maxlength="150"/>
+                                <p:tooltip for="foto" value="#{documentosController.getComponentMessages('foto', etiquetas.EditDocumentosHelpText_foto)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{documentosController.save}" value="#{etiquetas.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:DocumentosListPage:DocumentosListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:DocumentosListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

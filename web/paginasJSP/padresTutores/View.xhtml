@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PadresTutoresViewDlg" widgetVar="PadresTutoresViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{etiquetas.ViewPadresTutoresTitle}" closeOnEscape="true">
+
+            <h:form id="PadresTutoresViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{padresTutoresController.selected != null}">
+
+                        <h:outputText value="#{etiquetas.ViewPadresTutoresLabel_idPadresTutores}"/>
+                        <h:outputText value="#{padresTutoresController.selected.idPadresTutores}" title="#{etiquetas.ViewPadresTutoresTitle_idPadresTutores}"/>
+
+                        <h:outputText value="#{etiquetas.ViewPadresTutoresLabel_genero}"/>
+                        <h:outputText value="#{padresTutoresController.selected.genero}" title="#{etiquetas.ViewPadresTutoresTitle_genero}"/>
+
+                        <h:outputText value="#{etiquetas.ViewPadresTutoresLabel_numCedula}"/>
+                        <h:outputText value="#{padresTutoresController.selected.numCedula}" title="#{etiquetas.ViewPadresTutoresTitle_numCedula}"/>
+
+                        <h:outputText value="#{etiquetas.ViewPadresTutoresLabel_nombre}"/>
+                        <h:outputText value="#{padresTutoresController.selected.nombre}" title="#{etiquetas.ViewPadresTutoresTitle_nombre}"/>
+
+                        <h:outputText value="#{etiquetas.ViewPadresTutoresLabel_numTelefono}"/>
+                        <h:outputText value="#{padresTutoresController.selected.numTelefono}" title="#{etiquetas.ViewPadresTutoresTitle_numTelefono}"/>
+
+                        <h:outputText value="#{etiquetas.ViewPadresTutoresLabel_email}"/>
+                        <h:outputText value="#{padresTutoresController.selected.email}" title="#{etiquetas.ViewPadresTutoresTitle_email}"/>
+
+                        <h:outputText value="#{etiquetas.ViewPadresTutoresLabel_profecion}"/>
+                        <h:outputText value="#{padresTutoresController.selected.profecion}" title="#{etiquetas.ViewPadresTutoresTitle_profecion}"/>
+
+                        <h:outputText value="#{etiquetas.ViewPadresTutoresLabel_lugarTrabajo}"/>
+                        <h:outputText value="#{padresTutoresController.selected.lugarTrabajo}" title="#{etiquetas.ViewPadresTutoresTitle_lugarTrabajo}"/>
+
+                        <h:outputText value="#{etiquetas.ViewPadresTutoresLabel_direccionDomicilio}"/>
+                        <h:outputText value="#{padresTutoresController.selected.direccionDomicilio}" title="#{etiquetas.ViewPadresTutoresTitle_direccionDomicilio}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{etiquetas.Close}" onclick="PF('PadresTutoresViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

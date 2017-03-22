@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="DocumentosViewPage" lazy="true">
+        <pm:header title="#{etiquetas.ViewDocumentosTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{etiquetas.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:DocumentosListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="DocumentosViewForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{documentosController.selected != null}">
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewDocumentosLabel_idDocumentos}"/>
+                            <h:outputText value="#{documentosController.selected.idDocumentos}" title="#{etiquetas.ViewDocumentosTitle_idDocumentos}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewDocumentosLabel_certificadoMedico}"/>
+                            <h:outputText value="#{documentosController.selected.certificadoMedico}" title="#{etiquetas.ViewDocumentosTitle_certificadoMedico}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewDocumentosLabel_libretaCalificaciones}"/>
+                            <h:outputText value="#{documentosController.selected.libretaCalificaciones}" title="#{etiquetas.ViewDocumentosTitle_libretaCalificaciones}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewDocumentosLabel_comprobanteDeposito}"/>
+                            <h:outputText value="#{documentosController.selected.comprobanteDeposito}" title="#{etiquetas.ViewDocumentosTitle_comprobanteDeposito}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewDocumentosLabel_promocionesLegalizadas}"/>
+                            <h:outputText value="#{documentosController.selected.promocionesLegalizadas}" title="#{etiquetas.ViewDocumentosTitle_promocionesLegalizadas}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewDocumentosLabel_copiaCedula}"/>
+                            <h:outputText value="#{documentosController.selected.copiaCedula}" title="#{etiquetas.ViewDocumentosTitle_copiaCedula}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewDocumentosLabel_foto}"/>
+                            <h:outputText value="#{documentosController.selected.foto}" title="#{etiquetas.ViewDocumentosTitle_foto}"/>
+                        </pm:field>
+                    </p:outputPanel>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="AuditoriaDeleteCreatePage" lazy="true">
+        <pm:header title="#{etiquetas.CreateAuditoriaDeleteTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{etiquetas.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:AuditoriaDeleteListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="AuditoriaDeleteCreateForm">
+
+                <h:panelGroup id="display" rendered="#{auditoriaDeleteController.selected != null}">
+                    <p:outputPanel>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.CreateAuditoriaDeleteLabel_idCalificacion}" for="idCalificacion" />
+                            <h:panelGroup>
+                                <p:inputText id="idCalificacion" value="#{auditoriaDeleteController.selected.idCalificacion}" title="#{etiquetas.CreateAuditoriaDeleteTitle_idCalificacion}"/>
+                                <p:tooltip for="idCalificacion" value="#{auditoriaDeleteController.getComponentMessages('idCalificacion', etiquetas.CreateAuditoriaDeleteHelpText_idCalificacion)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.CreateAuditoriaDeleteLabel_fechaDelete}" for="fechaDelete" />
+                            <h:panelGroup>
+                                <p:calendar id="fechaDelete" pattern="MM/dd/yyyy" value="#{auditoriaDeleteController.selected.fechaDelete}" title="#{etiquetas.CreateAuditoriaDeleteTitle_fechaDelete}"  showOn="button"/>
+                                <p:tooltip for="fechaDelete" value="#{auditoriaDeleteController.getComponentMessages('fechaDelete', etiquetas.CreateAuditoriaDeleteHelpText_fechaDelete)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.CreateAuditoriaDeleteLabel_hora}" for="hora" />
+                            <h:panelGroup>
+                                <p:calendar id="hora" pattern="HH:mm:ss" value="#{auditoriaDeleteController.selected.hora}" title="#{etiquetas.CreateAuditoriaDeleteTitle_hora}"  showOn="button"/>
+                                <p:tooltip for="hora" value="#{auditoriaDeleteController.getComponentMessages('hora', etiquetas.CreateAuditoriaDeleteHelpText_hora)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.CreateAuditoriaDeleteLabel_usuario}" for="usuario" />
+                            <h:panelGroup>
+                                <p:inputText id="usuario" value="#{auditoriaDeleteController.selected.usuario}" title="#{etiquetas.CreateAuditoriaDeleteTitle_usuario}" size="15" maxlength="15"/>
+                                <p:tooltip for="usuario" value="#{auditoriaDeleteController.getComponentMessages('usuario', etiquetas.CreateAuditoriaDeleteHelpText_usuario)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{auditoriaDeleteController.saveNew}" value="#{etiquetas.Save}" update="display,:AuditoriaDeleteListPage:AuditoriaDeleteListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:AuditoriaDeleteListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

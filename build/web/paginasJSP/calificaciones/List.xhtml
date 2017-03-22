@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="CalificacionesListForm">
+
+        <p:panel header="#{etiquetas.ListCalificacionesTitle}">
+            <p:contextMenu id="CalificacionesDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{etiquetas.Create}" onclick="document.getElementById('CalificacionesListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{etiquetas.View}" onclick="document.getElementById('CalificacionesListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{etiquetas.Edit}" onclick="document.getElementById('CalificacionesListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{etiquetas.Delete}" onclick="document.getElementById('CalificacionesListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{etiquetas.CalificacionesMenuItem_parcialIdParcial}" icon="ui-icon-search"  actionListener="#{calificacionesController.prepareParcialIdParcial}" update=":ParcialViewForm" oncomplete="PF('ParcialViewDialog').show()" disabled="#{empty calificacionesController.selected.parcialIdParcial}"/>  
+                <p:menuitem value="#{etiquetas.CalificacionesMenuItem_cursoIdCurso}" icon="ui-icon-search"  actionListener="#{calificacionesController.prepareCursoIdCurso}" update=":CursoViewForm" oncomplete="PF('CursoViewDialog').show()" disabled="#{empty calificacionesController.selected.cursoIdCurso}"/>  
+                <p:menuitem value="#{etiquetas.CalificacionesMenuItem_paraleloIdParalelo}" icon="ui-icon-search"  actionListener="#{calificacionesController.prepareParaleloIdParalelo}" update=":ParaleloViewForm" oncomplete="PF('ParaleloViewDialog').show()" disabled="#{empty calificacionesController.selected.paraleloIdParalelo}"/>  
+                <p:menuitem value="#{etiquetas.CalificacionesMenuItem_periodoIdPeriodo}" icon="ui-icon-search"  actionListener="#{calificacionesController.preparePeriodoIdPeriodo}" update=":PeriodoViewForm" oncomplete="PF('PeriodoViewDialog').show()" disabled="#{empty calificacionesController.selected.periodoIdPeriodo}"/>  
+                <p:menuitem value="#{etiquetas.CalificacionesMenuItem_profesorIdProfesor}" icon="ui-icon-search"  actionListener="#{calificacionesController.prepareProfesorIdProfesor}" update=":ProfesorViewForm" oncomplete="PF('ProfesorViewDialog').show()" disabled="#{empty calificacionesController.selected.profesorIdProfesor}"/>  
+                <p:menuitem value="#{etiquetas.CalificacionesMenuItem_asignaturaIdAsignatura}" icon="ui-icon-search"  actionListener="#{calificacionesController.prepareAsignaturaIdAsignatura}" update=":AsignaturasViewForm" oncomplete="PF('AsignaturasViewDialog').show()" disabled="#{empty calificacionesController.selected.asignaturaIdAsignatura}"/>  
+                <p:menuitem value="#{etiquetas.CalificacionesMenuItem_estudianteIdEstudiante}" icon="ui-icon-search"  actionListener="#{calificacionesController.prepareEstudianteIdEstudiante}" update=":EstudianteViewForm" oncomplete="PF('EstudianteViewDialog').show()" disabled="#{empty calificacionesController.selected.estudianteIdEstudiante}"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{calificacionesController.lazyItems}"
+                         lazy="true"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{calificacionesController.selected}">
+                <!--
+                         To disable Lazy Loading, please copy/replace the following lines above,
+                         and be sure to replace the word HASH with the # symbol:
+                
+                         value="HASH{calificacionesController.items}"
+                         lazy="false"
+                         rowKey="HASH{item.idCalificaciones}"
+                -->
+
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:CalificacionesDataTableContextMenu" listener="#{calificacionesController.resetParents}"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:CalificacionesDataTableContextMenu" listener="#{calificacionesController.resetParents}"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{calificacionesController.resetParents}"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('CalificacionesListForm:viewButton').click();"/>
+
+                <!--
+                <p:column sortBy="#{item.idCalificaciones}" filterBy="#{item.idCalificaciones}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListCalificacionesTitle_idCalificaciones}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idCalificaciones}"/>
+                </p:column>
+                -->
+
+                <p:column sortBy="#{item.trabajos}" filterBy="#{item.trabajos}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListCalificacionesTitle_trabajos}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.trabajos}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.actuacionIndividual}" filterBy="#{item.actuacionIndividual}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListCalificacionesTitle_actuacionIndividual}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.actuacionIndividual}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.actividadGrupo}" filterBy="#{item.actividadGrupo}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListCalificacionesTitle_actividadGrupo}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.actividadGrupo}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.lecciones}" filterBy="#{item.lecciones}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListCalificacionesTitle_lecciones}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.lecciones}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.suma}" filterBy="#{item.suma}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListCalificacionesTitle_suma}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.suma}"/>
+                </p:column>
+
+               
+                                    <p:column sortBy="#{item.final1}" filterBy="#{item.final1}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{etiquetas.ListCalificacionesTitle_final1}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.final1}"/>
+                                    </p:column>
+                
+                
+                                    <p:column sortBy="#{item.parcialIdParcial.idParcial}" filterBy="#{item.parcialIdParcial.idParcial}">
+                                        <f:facet name="header">
+                                            <h:outputText value="Parcial"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.parcialIdParcial.nomParcial}"/>
+                                    </p:column>
+                
+                
+                                    <p:column sortBy="#{item.cursoIdCurso.idCurso}" filterBy="#{item.cursoIdCurso.idCurso}">
+                                        <f:facet name="header">
+                                            <h:outputText value="Curso"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.cursoIdCurso.nombreCurso}"/>
+                                    </p:column>
+                
+               
+                                    <p:column sortBy="#{item.paraleloIdParalelo.idParalelo}" filterBy="#{item.paraleloIdParalelo.idParalelo}">
+                                        <f:facet name="header">
+                                            <h:outputText value="Paralelo"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.paraleloIdParalelo.paralelo}"/>
+                                    </p:column>
+                
+                                    <p:column sortBy="#{item.periodoIdPeriodo.idPeriodo}" filterBy="#{item.periodoIdPeriodo.idPeriodo}">
+                                        <f:facet name="header">
+                                            <h:outputText value="Periodo"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.periodoIdPeriodo.nomPeriodo}"/>
+                                    </p:column>
+                
+                                    <p:column sortBy="#{item.profesorIdProfesor.idProfesor}" filterBy="#{item.profesorIdProfesor.idProfesor}">
+                                        <f:facet name="header">
+                                            <h:outputText value="Profesor"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.profesorIdProfesor.nomProfesor}"/>
+                                    </p:column>
+              
+                                    <p:column sortBy="#{item.asignaturaIdAsignatura.idAsignatura}" filterBy="#{item.asignaturaIdAsignatura.idAsignatura}">
+                                        <f:facet name="header">
+                                            <h:outputText value="Asignatura"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.asignaturaIdAsignatura.nomAsignatura}"/>
+                                    </p:column>
+                
+                                    <p:column sortBy="#{item.estudianteIdEstudiante.idEstudiante}" filterBy="#{item.estudianteIdEstudiante.idEstudiante}">
+                                        <f:facet name="header">
+                                            <h:outputText value="Estudiante"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.estudianteIdEstudiante.nomEstudiante}"/>
+                                    </p:column>
+               
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{etiquetas.Create}" actionListener="#{calificacionesController.prepareCreate}" update=":CalificacionesCreateForm" oncomplete="PF('CalificacionesCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{etiquetas.View}" update=":CalificacionesViewForm" oncomplete="PF('CalificacionesViewDialog').show()" disabled="#{empty calificacionesController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{etiquetas.Edit}" update=":CalificacionesEditForm" oncomplete="PF('CalificacionesEditDialog').show()" disabled="#{empty calificacionesController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{etiquetas.Delete}" actionListener="#{calificacionesController.delete}" update=":growl,datalist" disabled="#{empty calificacionesController.selected}">
+                <p:confirm header="#{etiquetas.ConfirmationHeader}" message="#{etiquetas.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+            
+            
+            
+            <h1> NOTAS</h1>
+        <h:form>
+            <p:commandButton value="Graficar" actionListener="#{resumen3Bean.listar()}" update="panel"/>
+            
+            <h:panelGroup id="panel" layout="block" >
+                <p:chart type="bar" model="#{resumen3Bean.barModel}" style="width: 400px; height: 300px" rendered="#{resumen3Bean.barModel != null}"/>
+            </h:panelGroup>
+        </h:form>
+            
+            
+            
+        </p:panel>
+        <ui:include src="/paginasJSP/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="DocumentosListForm">
+
+        <p:panel header="#{etiquetas.ListDocumentosTitle}">
+            <p:contextMenu id="DocumentosDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{etiquetas.Create}" onclick="document.getElementById('DocumentosListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{etiquetas.View}" onclick="document.getElementById('DocumentosListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{etiquetas.Edit}" onclick="document.getElementById('DocumentosListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{etiquetas.Delete}" onclick="document.getElementById('DocumentosListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{etiquetas.DocumentosMenuItem_estudianteCollection}" icon="ui-icon-search"  action="#{documentosController.navigateEstudianteCollection}" disabled="#{empty documentosController.selected.estudianteCollection}" ajax="false"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{documentosController.lazyItems}"
+                         lazy="true"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{documentosController.selected}">
+                <!--
+                         To disable Lazy Loading, please copy/replace the following lines above,
+                         and be sure to replace the word HASH with the # symbol:
+                
+                         value="HASH{documentosController.items}"
+                         lazy="false"
+                         rowKey="HASH{item.idDocumentos}"
+                -->
+
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:DocumentosDataTableContextMenu"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:DocumentosDataTableContextMenu"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('DocumentosListForm:viewButton').click();"/>
+                <!--
+                                <p:column sortBy="#{item.idDocumentos}" filterBy="#{item.idDocumentos}">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{etiquetas.ListDocumentosTitle_idDocumentos}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idDocumentos}"/>
+                                </p:column>
+                -->
+
+                <p:column sortBy="#{item.certificadoMedico}" filterBy="#{item.certificadoMedico}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListDocumentosTitle_certificadoMedico}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.certificadoMedico}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.libretaCalificaciones}" filterBy="#{item.libretaCalificaciones}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListDocumentosTitle_libretaCalificaciones}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.libretaCalificaciones}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.comprobanteDeposito}" filterBy="#{item.comprobanteDeposito}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListDocumentosTitle_comprobanteDeposito}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.comprobanteDeposito}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.promocionesLegalizadas}" filterBy="#{item.promocionesLegalizadas}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListDocumentosTitle_promocionesLegalizadas}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.promocionesLegalizadas}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.copiaCedula}" filterBy="#{item.copiaCedula}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListDocumentosTitle_copiaCedula}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.copiaCedula}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.foto}" filterBy="#{item.foto}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListDocumentosTitle_foto}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.foto}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{etiquetas.Create}" actionListener="#{documentosController.prepareCreate}" update=":DocumentosCreateForm" oncomplete="PF('DocumentosCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{etiquetas.View}" update=":DocumentosViewForm" oncomplete="PF('DocumentosViewDialog').show()" disabled="#{empty documentosController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{etiquetas.Edit}" update=":DocumentosEditForm" oncomplete="PF('DocumentosEditDialog').show()" disabled="#{empty documentosController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{etiquetas.Delete}" actionListener="#{documentosController.delete}" update=":growl,datalist" disabled="#{empty documentosController.selected}">
+                <p:confirm header="#{etiquetas.ConfirmationHeader}" message="#{etiquetas.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/paginasJSP/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

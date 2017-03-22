@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="ParcialEditDlg" widgetVar="ParcialEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{etiquetas.EditParcialTitle}" closeOnEscape="true">
+
+            <h:form id="ParcialEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{parcialController.selected != null}">
+
+
+                        <h:outputLabel value="#{etiquetas.EditParcialLabel_idParcial}" for="idParcial" />
+                        <h:panelGroup>
+                            <h:outputText id="idParcial" value="#{parcialController.selected.idParcial}" />
+                            <p:tooltip for="idParcial" value="#{parcialController.getComponentMessages('idParcial', etiquetas.EditParcialHelpText_idParcial)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.EditParcialLabel_nomParcial}" for="nomParcial" />
+                        <h:panelGroup>
+                            <p:inputText id="nomParcial" value="#{parcialController.selected.nomParcial}" title="#{etiquetas.EditParcialTitle_nomParcial}" required="true" requiredMessage="#{etiquetas.EditParcialRequiredMessage_nomParcial}" size="15" maxlength="15"/>
+                            <p:tooltip for="nomParcial" value="#{parcialController.getComponentMessages('nomParcial', etiquetas.EditParcialHelpText_nomParcial)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{parcialController.save}" value="#{etiquetas.Save}" update="display,:ParcialListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('ParcialEditDialog'));">
+                        <p:confirm header="#{etiquetas.ConfirmationHeader}" message="#{etiquetas.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{etiquetas.Cancel}" oncomplete="PF('ParcialEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

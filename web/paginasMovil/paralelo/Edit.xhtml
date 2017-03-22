@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="ParaleloEditPage" lazy="true">
+        <pm:header title="#{etiquetas.EditParaleloTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{etiquetas.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:ParaleloListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="ParaleloEditForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{paraleloController.selected != null}">
+
+                        <pm:field>
+                            <h:outputLabel value="#{etiquetas.EditParaleloLabel_idParalelo}" for="idParalelo" />
+                            <h:panelGroup>
+                                <h:outputText id="idParalelo" value="#{paraleloController.selected.idParalelo}" />
+                                <p:tooltip for="idParalelo" value="#{paraleloController.getComponentMessages('idParalelo', etiquetas.EditParaleloHelpText_idParalelo)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditParaleloLabel_paralelo}" for="paralelo" />
+                            <h:panelGroup>
+                                <p:inputText id="paralelo" value="#{paraleloController.selected.paralelo}" title="#{etiquetas.EditParaleloTitle_paralelo}" required="true" requiredMessage="#{etiquetas.EditParaleloRequiredMessage_paralelo}" size="2" maxlength="2"/>
+                                <p:tooltip for="paralelo" value="#{paraleloController.getComponentMessages('paralelo', etiquetas.EditParaleloHelpText_paralelo)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{paraleloController.save}" value="#{etiquetas.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:ParaleloListPage:ParaleloListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:ParaleloListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

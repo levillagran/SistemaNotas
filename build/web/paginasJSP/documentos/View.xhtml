@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DocumentosViewDlg" widgetVar="DocumentosViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{etiquetas.ViewDocumentosTitle}" closeOnEscape="true">
+
+            <h:form id="DocumentosViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{documentosController.selected != null}">
+
+                        <h:outputText value="#{etiquetas.ViewDocumentosLabel_idDocumentos}"/>
+                        <h:outputText value="#{documentosController.selected.idDocumentos}" title="#{etiquetas.ViewDocumentosTitle_idDocumentos}"/>
+
+                        <h:outputText value="#{etiquetas.ViewDocumentosLabel_certificadoMedico}"/>
+                        <h:outputText value="#{documentosController.selected.certificadoMedico}" title="#{etiquetas.ViewDocumentosTitle_certificadoMedico}"/>
+
+                        <h:outputText value="#{etiquetas.ViewDocumentosLabel_libretaCalificaciones}"/>
+                        <h:outputText value="#{documentosController.selected.libretaCalificaciones}" title="#{etiquetas.ViewDocumentosTitle_libretaCalificaciones}"/>
+
+                        <h:outputText value="#{etiquetas.ViewDocumentosLabel_comprobanteDeposito}"/>
+                        <h:outputText value="#{documentosController.selected.comprobanteDeposito}" title="#{etiquetas.ViewDocumentosTitle_comprobanteDeposito}"/>
+
+                        <h:outputText value="#{etiquetas.ViewDocumentosLabel_promocionesLegalizadas}"/>
+                        <h:outputText value="#{documentosController.selected.promocionesLegalizadas}" title="#{etiquetas.ViewDocumentosTitle_promocionesLegalizadas}"/>
+
+                        <h:outputText value="#{etiquetas.ViewDocumentosLabel_copiaCedula}"/>
+                        <h:outputText value="#{documentosController.selected.copiaCedula}" title="#{etiquetas.ViewDocumentosTitle_copiaCedula}"/>
+
+                        <h:outputText value="#{etiquetas.ViewDocumentosLabel_foto}"/>
+                        <h:outputText value="#{documentosController.selected.foto}" title="#{etiquetas.ViewDocumentosTitle_foto}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{etiquetas.Close}" onclick="PF('DocumentosViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

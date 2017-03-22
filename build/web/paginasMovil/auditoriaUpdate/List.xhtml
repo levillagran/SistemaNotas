@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="AuditoriaUpdateListPage">
+        <pm:header title="#{etiquetas.ListAuditoriaUpdateTitle}">
+            <h:form>
+                <p:commandButton id="backButton"   styleClass="ui-btn-left  ui-btn-inline" icon="ui-icon-arrow-l" value="#{myBundle.Back}" action="#{mobilePageController.navigateBackInHistory('/paginasMovil/index')}"/>
+                <p:commandButton id="createButton" styleClass="ui-btn-right ui-btn-inline" icon="ui-icon-plus"    value="#{etiquetas.Create}" update=":AuditoriaUpdateCreatePage:AuditoriaUpdateCreateForm" actionListener="#{auditoriaUpdateController.prepareCreate}" action="#{mobilePageController.navigateWithHistory('pm:AuditoriaUpdateCreatePage')}">
+                    <f:actionListener binding="#{currentPageListener}"/>
+                </p:commandButton>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="AuditoriaUpdateListForm">
+
+                <p:dataList id="datalist"
+                            paginator="true"
+                            rows="10"
+                            rowsPerPageTemplate="10,20,30,40,50"
+                            pt:data-inset="true"
+                            value="#{auditoriaUpdateController.items}"
+                            var="item">
+
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListAuditoriaUpdateTitle}"/>
+                    </f:facet>
+
+                    <p:commandLink update=":AuditoriaUpdateEditPage:AuditoriaUpdateEditForm" action="pm:AuditoriaUpdateEditPage">
+                        <p>
+
+
+
+                            <h:outputText value="#{item.idAuditoria}"/>
+
+
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.idCalificacion}"/>
+
+
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.fechaUpdate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+
+
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.hora}">
+                                <f:convertDateTime pattern="HH:mm:ss" />
+                            </h:outputText>
+
+
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.usuario}"/>
+
+                        </p>
+                        <f:setPropertyActionListener value="#{item}" target="#{auditoriaUpdateController.selected}" />
+                    </p:commandLink>
+
+                    <f:facet name="footer">
+                        <h:outputText value="#{etiquetas.ListAuditoriaUpdateTitle}"/>
+                    </f:facet>
+
+                </p:dataList>
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

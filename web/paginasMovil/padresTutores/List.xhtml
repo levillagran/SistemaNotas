@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="PadresTutoresListPage">
+        <pm:header title="#{etiquetas.ListPadresTutoresTitle}">
+            <h:form>
+                <p:commandButton id="backButton"   styleClass="ui-btn-left  ui-btn-inline" icon="ui-icon-arrow-l" value="#{myBundle.Back}" action="#{mobilePageController.navigateBackInHistory('/paginasMovil/index')}"/>
+                <p:commandButton id="createButton" styleClass="ui-btn-right ui-btn-inline" icon="ui-icon-plus"    value="#{etiquetas.Create}" update=":PadresTutoresCreatePage:PadresTutoresCreateForm" actionListener="#{padresTutoresController.prepareCreate}" action="#{mobilePageController.navigateWithHistory('pm:PadresTutoresCreatePage')}">
+                    <f:actionListener binding="#{currentPageListener}"/>
+                </p:commandButton>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="PadresTutoresListForm">
+
+                <p:dataList id="datalist"
+                            paginator="true"
+                            rows="10"
+                            rowsPerPageTemplate="10,20,30,40,50"
+                            pt:data-inset="true"
+                            value="#{padresTutoresController.items}"
+                            var="item">
+
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListPadresTutoresTitle}"/>
+                    </f:facet>
+
+                    <p:commandLink update=":PadresTutoresEditPage:PadresTutoresEditForm" action="pm:PadresTutoresEditPage">
+                        <p>
+
+
+
+                            <h:outputText value="#{item.idPadresTutores}"/>
+
+
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.genero}"/>
+
+
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.numCedula}"/>
+
+
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.nombre}"/>
+
+
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.numTelefono}"/>
+
+
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.email}"/>
+
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.profecion}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.lugarTrabajo}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.direccionDomicilio}"/>
+                            -->
+
+                        </p>
+                        <f:setPropertyActionListener value="#{item}" target="#{padresTutoresController.selected}" />
+                    </p:commandLink>
+
+                    <f:facet name="footer">
+                        <h:outputText value="#{etiquetas.ListPadresTutoresTitle}"/>
+                    </f:facet>
+
+                </p:dataList>
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

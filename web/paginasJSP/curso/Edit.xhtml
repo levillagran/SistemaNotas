@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="CursoEditDlg" widgetVar="CursoEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{etiquetas.EditCursoTitle}" closeOnEscape="true">
+
+            <h:form id="CursoEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{cursoController.selected != null}">
+
+
+                        <h:outputLabel value="#{etiquetas.EditCursoLabel_idCurso}" for="idCurso" />
+                        <h:panelGroup>
+                            <h:outputText id="idCurso" value="#{cursoController.selected.idCurso}" />
+                            <p:tooltip for="idCurso" value="#{cursoController.getComponentMessages('idCurso', etiquetas.EditCursoHelpText_idCurso)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.EditCursoLabel_nombreCurso}" for="nombreCurso" />
+                        <h:panelGroup>
+                            <p:inputText id="nombreCurso" value="#{cursoController.selected.nombreCurso}" title="#{etiquetas.EditCursoTitle_nombreCurso}" size="10" maxlength="10"/>
+                            <p:tooltip for="nombreCurso" value="#{cursoController.getComponentMessages('nombreCurso', etiquetas.EditCursoHelpText_nombreCurso)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{cursoController.save}" value="#{etiquetas.Save}" update="display,:CursoListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('CursoEditDialog'));">
+                        <p:confirm header="#{etiquetas.ConfirmationHeader}" message="#{etiquetas.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{etiquetas.Cancel}" oncomplete="PF('CursoEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

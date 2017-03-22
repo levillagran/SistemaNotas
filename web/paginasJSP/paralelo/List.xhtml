@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="ParaleloListForm">
+
+        <p:panel header="#{etiquetas.ListParaleloTitle}">
+            <p:contextMenu id="ParaleloDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{etiquetas.Create}" onclick="document.getElementById('ParaleloListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{etiquetas.View}" onclick="document.getElementById('ParaleloListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{etiquetas.Edit}" onclick="document.getElementById('ParaleloListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{etiquetas.Delete}" onclick="document.getElementById('ParaleloListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{etiquetas.ParaleloMenuItem_calificacionesCollection}" icon="ui-icon-search"  action="#{paraleloController.navigateCalificacionesCollection}" disabled="#{empty paraleloController.selected.calificacionesCollection}" ajax="false"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{paraleloController.lazyItems}"
+                         lazy="true"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{paraleloController.selected}">
+                <!--
+                         To disable Lazy Loading, please copy/replace the following lines above,
+                         and be sure to replace the word HASH with the # symbol:
+                
+                         value="HASH{paraleloController.items}"
+                         lazy="false"
+                         rowKey="HASH{item.idParalelo}"
+                -->
+
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:ParaleloDataTableContextMenu"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:ParaleloDataTableContextMenu"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('ParaleloListForm:viewButton').click();"/>
+                <!--
+                                <p:column sortBy="#{item.idParalelo}" filterBy="#{item.idParalelo}">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{etiquetas.ListParaleloTitle_idParalelo}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idParalelo}"/>
+                                </p:column>
+                -->
+
+                <p:column sortBy="#{item.paralelo}" filterBy="#{item.paralelo}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListParaleloTitle_paralelo}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.paralelo}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{etiquetas.Create}" actionListener="#{paraleloController.prepareCreate}" update=":ParaleloCreateForm" oncomplete="PF('ParaleloCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{etiquetas.View}" update=":ParaleloViewForm" oncomplete="PF('ParaleloViewDialog').show()" disabled="#{empty paraleloController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{etiquetas.Edit}" update=":ParaleloEditForm" oncomplete="PF('ParaleloEditDialog').show()" disabled="#{empty paraleloController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{etiquetas.Delete}" actionListener="#{paraleloController.delete}" update=":growl,datalist" disabled="#{empty paraleloController.selected}">
+                <p:confirm header="#{etiquetas.ConfirmationHeader}" message="#{etiquetas.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/paginasJSP/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

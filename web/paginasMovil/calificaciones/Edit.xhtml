@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="CalificacionesEditPage" lazy="true">
+        <pm:header title="#{etiquetas.EditCalificacionesTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{etiquetas.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:CalificacionesListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="CalificacionesEditForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{calificacionesController.selected != null}">
+
+                        <pm:field>
+                            <h:outputLabel value="#{etiquetas.EditCalificacionesLabel_idCalificaciones}" for="idCalificaciones" />
+                            <h:panelGroup>
+                                <h:outputText id="idCalificaciones" value="#{calificacionesController.selected.idCalificaciones}" />
+                                <p:tooltip for="idCalificaciones" value="#{calificacionesController.getComponentMessages('idCalificaciones', etiquetas.EditCalificacionesHelpText_idCalificaciones)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditCalificacionesLabel_trabajos}" for="trabajos" />
+                            <h:panelGroup>
+                                <p:inputText id="trabajos" value="#{calificacionesController.selected.trabajos}" title="#{etiquetas.EditCalificacionesTitle_trabajos}" required="true" requiredMessage="#{etiquetas.EditCalificacionesRequiredMessage_trabajos}"/>
+                                <p:tooltip for="trabajos" value="#{calificacionesController.getComponentMessages('trabajos', etiquetas.EditCalificacionesHelpText_trabajos)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditCalificacionesLabel_actuacionIndividual}" for="actuacionIndividual" />
+                            <h:panelGroup>
+                                <p:inputText id="actuacionIndividual" value="#{calificacionesController.selected.actuacionIndividual}" title="#{etiquetas.EditCalificacionesTitle_actuacionIndividual}" required="true" requiredMessage="#{etiquetas.EditCalificacionesRequiredMessage_actuacionIndividual}"/>
+                                <p:tooltip for="actuacionIndividual" value="#{calificacionesController.getComponentMessages('actuacionIndividual', etiquetas.EditCalificacionesHelpText_actuacionIndividual)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditCalificacionesLabel_actividadGrupo}" for="actividadGrupo" />
+                            <h:panelGroup>
+                                <p:inputText id="actividadGrupo" value="#{calificacionesController.selected.actividadGrupo}" title="#{etiquetas.EditCalificacionesTitle_actividadGrupo}" required="true" requiredMessage="#{etiquetas.EditCalificacionesRequiredMessage_actividadGrupo}"/>
+                                <p:tooltip for="actividadGrupo" value="#{calificacionesController.getComponentMessages('actividadGrupo', etiquetas.EditCalificacionesHelpText_actividadGrupo)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditCalificacionesLabel_lecciones}" for="lecciones" />
+                            <h:panelGroup>
+                                <p:inputText id="lecciones" value="#{calificacionesController.selected.lecciones}" title="#{etiquetas.EditCalificacionesTitle_lecciones}" required="true" requiredMessage="#{etiquetas.EditCalificacionesRequiredMessage_lecciones}"/>
+                                <p:tooltip for="lecciones" value="#{calificacionesController.getComponentMessages('lecciones', etiquetas.EditCalificacionesHelpText_lecciones)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditCalificacionesLabel_suma}" for="suma" />
+                            <h:panelGroup>
+                                <p:inputText id="suma" value="#{calificacionesController.selected.suma}" title="#{etiquetas.EditCalificacionesTitle_suma}" required="true" requiredMessage="#{etiquetas.EditCalificacionesRequiredMessage_suma}"/>
+                                <p:tooltip for="suma" value="#{calificacionesController.getComponentMessages('suma', etiquetas.EditCalificacionesHelpText_suma)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditCalificacionesLabel_final1}" for="final1" />
+                            <h:panelGroup>
+                                <p:inputText id="final1" value="#{calificacionesController.selected.final1}" title="#{etiquetas.EditCalificacionesTitle_final1}" required="true" requiredMessage="#{etiquetas.EditCalificacionesRequiredMessage_final1}"/>
+                                <p:tooltip for="final1" value="#{calificacionesController.getComponentMessages('final1', etiquetas.EditCalificacionesHelpText_final1)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditCalificacionesLabel_parcialIdParcial}" for="parcialIdParcial" />
+                            <h:panelGroup>
+                                <p:selectOneMenu id="parcialIdParcial" value="#{calificacionesController.selected.parcialIdParcial}" required="true" requiredMessage="#{etiquetas.EditCalificacionesRequiredMessage_parcialIdParcial}" converter="parcialConverter">
+                                    <f:selectItem itemLabel="#{etiquetas.SelectOneMessage}"/>
+                                    <f:selectItems value="#{parcialController.items}"
+                                                   var="parcialIdParcialItem"
+                                                   itemValue="#{parcialIdParcialItem}"
+                                                   itemLabel="#{parcialIdParcialItem.idParcial.toString()}"
+                                                   />
+
+                                </p:selectOneMenu>
+                                <p:tooltip for="parcialIdParcial" value="#{calificacionesController.getComponentMessages('parcialIdParcial', etiquetas.EditCalificacionesHelpText_parcialIdParcial)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditCalificacionesLabel_cursoIdCurso}" for="cursoIdCurso" />
+                            <h:panelGroup>
+                                <p:selectOneMenu id="cursoIdCurso" value="#{calificacionesController.selected.cursoIdCurso}" required="true" requiredMessage="#{etiquetas.EditCalificacionesRequiredMessage_cursoIdCurso}" converter="cursoConverter">
+                                    <f:selectItem itemLabel="#{etiquetas.SelectOneMessage}"/>
+                                    <f:selectItems value="#{cursoController.items}"
+                                                   var="cursoIdCursoItem"
+                                                   itemValue="#{cursoIdCursoItem}"
+                                                   itemLabel="#{cursoIdCursoItem.idCurso.toString()}"
+                                                   />
+
+                                </p:selectOneMenu>
+                                <p:tooltip for="cursoIdCurso" value="#{calificacionesController.getComponentMessages('cursoIdCurso', etiquetas.EditCalificacionesHelpText_cursoIdCurso)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditCalificacionesLabel_paraleloIdParalelo}" for="paraleloIdParalelo" />
+                            <h:panelGroup>
+                                <p:selectOneMenu id="paraleloIdParalelo" value="#{calificacionesController.selected.paraleloIdParalelo}" required="true" requiredMessage="#{etiquetas.EditCalificacionesRequiredMessage_paraleloIdParalelo}" converter="paraleloConverter">
+                                    <f:selectItem itemLabel="#{etiquetas.SelectOneMessage}"/>
+                                    <f:selectItems value="#{paraleloController.items}"
+                                                   var="paraleloIdParaleloItem"
+                                                   itemValue="#{paraleloIdParaleloItem}"
+                                                   itemLabel="#{paraleloIdParaleloItem.idParalelo.toString()}"
+                                                   />
+
+                                </p:selectOneMenu>
+                                <p:tooltip for="paraleloIdParalelo" value="#{calificacionesController.getComponentMessages('paraleloIdParalelo', etiquetas.EditCalificacionesHelpText_paraleloIdParalelo)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditCalificacionesLabel_periodoIdPeriodo}" for="periodoIdPeriodo" />
+                            <h:panelGroup>
+                                <p:selectOneMenu id="periodoIdPeriodo" value="#{calificacionesController.selected.periodoIdPeriodo}" required="true" requiredMessage="#{etiquetas.EditCalificacionesRequiredMessage_periodoIdPeriodo}" converter="periodoConverter">
+                                    <f:selectItem itemLabel="#{etiquetas.SelectOneMessage}"/>
+                                    <f:selectItems value="#{periodoController.items}"
+                                                   var="periodoIdPeriodoItem"
+                                                   itemValue="#{periodoIdPeriodoItem}"
+                                                   itemLabel="#{periodoIdPeriodoItem.idPeriodo.toString()}"
+                                                   />
+
+                                </p:selectOneMenu>
+                                <p:tooltip for="periodoIdPeriodo" value="#{calificacionesController.getComponentMessages('periodoIdPeriodo', etiquetas.EditCalificacionesHelpText_periodoIdPeriodo)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditCalificacionesLabel_profesorIdProfesor}" for="profesorIdProfesor" />
+                            <h:panelGroup>
+                                <p:selectOneMenu id="profesorIdProfesor" value="#{calificacionesController.selected.profesorIdProfesor}" required="true" requiredMessage="#{etiquetas.EditCalificacionesRequiredMessage_profesorIdProfesor}" converter="profesorConverter">
+                                    <f:selectItem itemLabel="#{etiquetas.SelectOneMessage}"/>
+                                    <f:selectItems value="#{profesorController.items}"
+                                                   var="profesorIdProfesorItem"
+                                                   itemValue="#{profesorIdProfesorItem}"
+                                                   itemLabel="#{profesorIdProfesorItem.idProfesor.toString()}"
+                                                   />
+
+                                </p:selectOneMenu>
+                                <p:tooltip for="profesorIdProfesor" value="#{calificacionesController.getComponentMessages('profesorIdProfesor', etiquetas.EditCalificacionesHelpText_profesorIdProfesor)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditCalificacionesLabel_asignaturaIdAsignatura}" for="asignaturaIdAsignatura" />
+                            <h:panelGroup>
+                                <p:selectOneMenu id="asignaturaIdAsignatura" value="#{calificacionesController.selected.asignaturaIdAsignatura}" required="true" requiredMessage="#{etiquetas.EditCalificacionesRequiredMessage_asignaturaIdAsignatura}" converter="asignaturasConverter">
+                                    <f:selectItem itemLabel="#{etiquetas.SelectOneMessage}"/>
+                                    <f:selectItems value="#{asignaturasController.items}"
+                                                   var="asignaturaIdAsignaturaItem"
+                                                   itemValue="#{asignaturaIdAsignaturaItem}"
+                                                   itemLabel="#{asignaturaIdAsignaturaItem.idAsignatura.toString()}"
+                                                   />
+
+                                </p:selectOneMenu>
+                                <p:tooltip for="asignaturaIdAsignatura" value="#{calificacionesController.getComponentMessages('asignaturaIdAsignatura', etiquetas.EditCalificacionesHelpText_asignaturaIdAsignatura)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditCalificacionesLabel_estudianteIdEstudiante}" for="estudianteIdEstudiante" />
+                            <h:panelGroup>
+                                <p:selectOneMenu id="estudianteIdEstudiante" value="#{calificacionesController.selected.estudianteIdEstudiante}" required="true" requiredMessage="#{etiquetas.EditCalificacionesRequiredMessage_estudianteIdEstudiante}" converter="estudianteConverter">
+                                    <f:selectItem itemLabel="#{etiquetas.SelectOneMessage}"/>
+                                    <f:selectItems value="#{estudianteController.items}"
+                                                   var="estudianteIdEstudianteItem"
+                                                   itemValue="#{estudianteIdEstudianteItem}"
+                                                   itemLabel="#{estudianteIdEstudianteItem.idEstudiante.toString()}"
+                                                   />
+
+                                </p:selectOneMenu>
+                                <p:tooltip for="estudianteIdEstudiante" value="#{calificacionesController.getComponentMessages('estudianteIdEstudiante', etiquetas.EditCalificacionesHelpText_estudianteIdEstudiante)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{calificacionesController.save}" value="#{etiquetas.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:CalificacionesListPage:CalificacionesListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:CalificacionesListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

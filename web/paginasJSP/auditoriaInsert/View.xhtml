@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AuditoriaInsertViewDlg" widgetVar="AuditoriaInsertViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{etiquetas.ViewAuditoriaInsertTitle}" closeOnEscape="true">
+
+            <h:form id="AuditoriaInsertViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{auditoriaInsertController.selected != null}">
+
+                        <h:outputText value="#{etiquetas.ViewAuditoriaInsertLabel_idAuditoria}"/>
+                        <h:outputText value="#{auditoriaInsertController.selected.idAuditoria}" title="#{etiquetas.ViewAuditoriaInsertTitle_idAuditoria}"/>
+
+                        <h:outputText value="#{etiquetas.ViewAuditoriaInsertLabel_idCalificacion}"/>
+                        <h:outputText value="#{auditoriaInsertController.selected.idCalificacion}" title="#{etiquetas.ViewAuditoriaInsertTitle_idCalificacion}"/>
+
+                        <h:outputText value="#{etiquetas.ViewAuditoriaInsertLabel_fechaInsert}"/>
+                        <h:outputText value="#{auditoriaInsertController.selected.fechaInsert}" title="#{etiquetas.ViewAuditoriaInsertTitle_fechaInsert}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+
+                        <h:outputText value="#{etiquetas.ViewAuditoriaInsertLabel_hora}"/>
+                        <h:outputText value="#{auditoriaInsertController.selected.hora}" title="#{etiquetas.ViewAuditoriaInsertTitle_hora}">
+                            <f:convertDateTime pattern="HH:mm:ss" />
+                        </h:outputText>
+
+                        <h:outputText value="#{etiquetas.ViewAuditoriaInsertLabel_usuario}"/>
+                        <h:outputText value="#{auditoriaInsertController.selected.usuario}" title="#{etiquetas.ViewAuditoriaInsertTitle_usuario}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{etiquetas.Close}" onclick="PF('AuditoriaInsertViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

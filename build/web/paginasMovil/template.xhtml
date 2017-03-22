@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pm="http://primefaces.org/mobile">
+
+    <f:view renderKitId="PRIMEFACES_MOBILE">
+        <ui:insert name="metadata"/>
+    </f:view>
+
+
+    <h:head>
+        <title><ui:insert name="title">Default Title</ui:insert></title>
+        <h:outputStylesheet library="css" name="pfcrud.css"/>
+        <h:outputScript library="scripts" name="pfcrud.js"/>
+        <h:outputScript target="head">
+            jQuery(document).ready(function() {
+            jQuery(document).ready(function() {
+            fixPFMDialogs();
+            });
+            });
+        </h:outputScript>
+        <style>
+            table#t01, th#t01, td#t01 {
+                border: 3px solid black;
+                border-collapse: collapse;
+            }
+        </style>
+    </h:head>
+
+    <h:body>
+
+        <p:growl id="growl" life="3000" globalOnly="true" />
+
+        <ui:insert name="body"/>
+        <table id="t01" style="width:100%">
+            <tr>
+                <th>
+                    <img src="../imagenes/logo.png" alt=""/>
+                </th>
+                <th>
+                    <pre STYLE="font-family:sans-serif ;font-size: 13px;color: grey" >
+                        Educamos para amar y servir con el lema:
+
+                        Fé:
+
+                        "Es la fé que nos permite cambiar la mirada y ver más allá".
+                        Propiciamos una experiencia de vida sencilla y 
+                        una experiencia significativa de Dios.
+
+
+                        Pureza:
+
+                        "Sean puros como el agua para fluir y fluir".
+                        Comunicamos con espontaneidad, sinceridad y un 
+                        actuar con rectitud, en toda circunstancia de la vida.
+
+
+                        Esfuerzo:
+
+                        "Renunciar al esfuerzo es renunciar al progreso, 
+                        a la fecundidad, a crecer; es renunciar a la vida" M.B.
+                        Lo expresamos en la entrega, el sacrificio, a la constancia, 
+                        la superación y la lucha hasta conseguir el ideal.
+                    </pre>
+                </th>
+                <th>
+                    <img src="../imagenes/fachada.png" alt=""/>
+                </th>
+            </tr>
+        </table>
+        <ui:insert name="footer"/>
+
+    </h:body>
+
+</html>

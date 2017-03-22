@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="AsignaturasEditPage" lazy="true">
+        <pm:header title="#{etiquetas.EditAsignaturasTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{etiquetas.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:AsignaturasListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="AsignaturasEditForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{asignaturasController.selected != null}">
+
+                        <pm:field>
+                            <h:outputLabel value="#{etiquetas.EditAsignaturasLabel_idAsignatura}" for="idAsignatura" />
+                            <h:panelGroup>
+                                <h:outputText id="idAsignatura" value="#{asignaturasController.selected.idAsignatura}" />
+                                <p:tooltip for="idAsignatura" value="#{asignaturasController.getComponentMessages('idAsignatura', etiquetas.EditAsignaturasHelpText_idAsignatura)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditAsignaturasLabel_nomAsignatura}" for="nomAsignatura" />
+                            <h:panelGroup>
+                                <p:inputText id="nomAsignatura" value="#{asignaturasController.selected.nomAsignatura}" title="#{etiquetas.EditAsignaturasTitle_nomAsignatura}" required="true" requiredMessage="#{etiquetas.EditAsignaturasRequiredMessage_nomAsignatura}" size="30" maxlength="30"/>
+                                <p:tooltip for="nomAsignatura" value="#{asignaturasController.getComponentMessages('nomAsignatura', etiquetas.EditAsignaturasHelpText_nomAsignatura)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{asignaturasController.save}" value="#{etiquetas.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:AsignaturasListPage:AsignaturasListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:AsignaturasListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

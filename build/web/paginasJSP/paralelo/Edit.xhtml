@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="ParaleloEditDlg" widgetVar="ParaleloEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{etiquetas.EditParaleloTitle}" closeOnEscape="true">
+
+            <h:form id="ParaleloEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{paraleloController.selected != null}">
+
+
+                        <h:outputLabel value="#{etiquetas.EditParaleloLabel_idParalelo}" for="idParalelo" />
+                        <h:panelGroup>
+                            <h:outputText id="idParalelo" value="#{paraleloController.selected.idParalelo}" />
+                            <p:tooltip for="idParalelo" value="#{paraleloController.getComponentMessages('idParalelo', etiquetas.EditParaleloHelpText_idParalelo)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.EditParaleloLabel_paralelo}" for="paralelo" />
+                        <h:panelGroup>
+                            <p:inputText id="paralelo" value="#{paraleloController.selected.paralelo}" title="#{etiquetas.EditParaleloTitle_paralelo}" required="true" requiredMessage="#{etiquetas.EditParaleloRequiredMessage_paralelo}" size="2" maxlength="2"/>
+                            <p:tooltip for="paralelo" value="#{paraleloController.getComponentMessages('paralelo', etiquetas.EditParaleloHelpText_paralelo)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{paraleloController.save}" value="#{etiquetas.Save}" update="display,:ParaleloListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('ParaleloEditDialog'));">
+                        <p:confirm header="#{etiquetas.ConfirmationHeader}" message="#{etiquetas.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{etiquetas.Cancel}" oncomplete="PF('ParaleloEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

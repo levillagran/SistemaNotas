@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="AuditoriaUpdateEditPage" lazy="true">
+        <pm:header title="#{etiquetas.EditAuditoriaUpdateTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{etiquetas.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:AuditoriaUpdateListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="AuditoriaUpdateEditForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{auditoriaUpdateController.selected != null}">
+
+                        <pm:field>
+                            <h:outputLabel value="#{etiquetas.EditAuditoriaUpdateLabel_idAuditoria}" for="idAuditoria" />
+                            <h:panelGroup>
+                                <h:outputText id="idAuditoria" value="#{auditoriaUpdateController.selected.idAuditoria}" />
+                                <p:tooltip for="idAuditoria" value="#{auditoriaUpdateController.getComponentMessages('idAuditoria', etiquetas.EditAuditoriaUpdateHelpText_idAuditoria)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditAuditoriaUpdateLabel_idCalificacion}" for="idCalificacion" />
+                            <h:panelGroup>
+                                <p:inputText id="idCalificacion" value="#{auditoriaUpdateController.selected.idCalificacion}" title="#{etiquetas.EditAuditoriaUpdateTitle_idCalificacion}"/>
+                                <p:tooltip for="idCalificacion" value="#{auditoriaUpdateController.getComponentMessages('idCalificacion', etiquetas.EditAuditoriaUpdateHelpText_idCalificacion)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditAuditoriaUpdateLabel_fechaUpdate}" for="fechaUpdate" />
+                            <h:panelGroup>
+                                <p:calendar id="fechaUpdate" pattern="MM/dd/yyyy" value="#{auditoriaUpdateController.selected.fechaUpdate}" title="#{etiquetas.EditAuditoriaUpdateTitle_fechaUpdate}"  showOn="button"/>
+                                <p:tooltip for="fechaUpdate" value="#{auditoriaUpdateController.getComponentMessages('fechaUpdate', etiquetas.EditAuditoriaUpdateHelpText_fechaUpdate)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditAuditoriaUpdateLabel_hora}" for="hora" />
+                            <h:panelGroup>
+                                <p:calendar id="hora" pattern="HH:mm:ss" value="#{auditoriaUpdateController.selected.hora}" title="#{etiquetas.EditAuditoriaUpdateTitle_hora}"  showOn="button"/>
+                                <p:tooltip for="hora" value="#{auditoriaUpdateController.getComponentMessages('hora', etiquetas.EditAuditoriaUpdateHelpText_hora)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditAuditoriaUpdateLabel_usuario}" for="usuario" />
+                            <h:panelGroup>
+                                <p:inputText id="usuario" value="#{auditoriaUpdateController.selected.usuario}" title="#{etiquetas.EditAuditoriaUpdateTitle_usuario}" size="15" maxlength="15"/>
+                                <p:tooltip for="usuario" value="#{auditoriaUpdateController.getComponentMessages('usuario', etiquetas.EditAuditoriaUpdateHelpText_usuario)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{auditoriaUpdateController.save}" value="#{etiquetas.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:AuditoriaUpdateListPage:AuditoriaUpdateListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:AuditoriaUpdateListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

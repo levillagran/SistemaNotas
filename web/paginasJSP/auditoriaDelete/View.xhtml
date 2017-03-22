@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AuditoriaDeleteViewDlg" widgetVar="AuditoriaDeleteViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{etiquetas.ViewAuditoriaDeleteTitle}" closeOnEscape="true">
+
+            <h:form id="AuditoriaDeleteViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{auditoriaDeleteController.selected != null}">
+
+                        <h:outputText value="#{etiquetas.ViewAuditoriaDeleteLabel_idAuditoria}"/>
+                        <h:outputText value="#{auditoriaDeleteController.selected.idAuditoria}" title="#{etiquetas.ViewAuditoriaDeleteTitle_idAuditoria}"/>
+
+                        <h:outputText value="#{etiquetas.ViewAuditoriaDeleteLabel_idCalificacion}"/>
+                        <h:outputText value="#{auditoriaDeleteController.selected.idCalificacion}" title="#{etiquetas.ViewAuditoriaDeleteTitle_idCalificacion}"/>
+
+                        <h:outputText value="#{etiquetas.ViewAuditoriaDeleteLabel_fechaDelete}"/>
+                        <h:outputText value="#{auditoriaDeleteController.selected.fechaDelete}" title="#{etiquetas.ViewAuditoriaDeleteTitle_fechaDelete}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+
+                        <h:outputText value="#{etiquetas.ViewAuditoriaDeleteLabel_hora}"/>
+                        <h:outputText value="#{auditoriaDeleteController.selected.hora}" title="#{etiquetas.ViewAuditoriaDeleteTitle_hora}">
+                            <f:convertDateTime pattern="HH:mm:ss" />
+                        </h:outputText>
+
+                        <h:outputText value="#{etiquetas.ViewAuditoriaDeleteLabel_usuario}"/>
+                        <h:outputText value="#{auditoriaDeleteController.selected.usuario}" title="#{etiquetas.ViewAuditoriaDeleteTitle_usuario}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{etiquetas.Close}" onclick="PF('AuditoriaDeleteViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="AuditoriaInsertEditPage" lazy="true">
+        <pm:header title="#{etiquetas.EditAuditoriaInsertTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{etiquetas.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:AuditoriaInsertListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="AuditoriaInsertEditForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{auditoriaInsertController.selected != null}">
+
+                        <pm:field>
+                            <h:outputLabel value="#{etiquetas.EditAuditoriaInsertLabel_idAuditoria}" for="idAuditoria" />
+                            <h:panelGroup>
+                                <h:outputText id="idAuditoria" value="#{auditoriaInsertController.selected.idAuditoria}" />
+                                <p:tooltip for="idAuditoria" value="#{auditoriaInsertController.getComponentMessages('idAuditoria', etiquetas.EditAuditoriaInsertHelpText_idAuditoria)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditAuditoriaInsertLabel_idCalificacion}" for="idCalificacion" />
+                            <h:panelGroup>
+                                <p:inputText id="idCalificacion" value="#{auditoriaInsertController.selected.idCalificacion}" title="#{etiquetas.EditAuditoriaInsertTitle_idCalificacion}"/>
+                                <p:tooltip for="idCalificacion" value="#{auditoriaInsertController.getComponentMessages('idCalificacion', etiquetas.EditAuditoriaInsertHelpText_idCalificacion)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditAuditoriaInsertLabel_fechaInsert}" for="fechaInsert" />
+                            <h:panelGroup>
+                                <p:calendar id="fechaInsert" pattern="MM/dd/yyyy" value="#{auditoriaInsertController.selected.fechaInsert}" title="#{etiquetas.EditAuditoriaInsertTitle_fechaInsert}"  showOn="button"/>
+                                <p:tooltip for="fechaInsert" value="#{auditoriaInsertController.getComponentMessages('fechaInsert', etiquetas.EditAuditoriaInsertHelpText_fechaInsert)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditAuditoriaInsertLabel_hora}" for="hora" />
+                            <h:panelGroup>
+                                <p:calendar id="hora" pattern="HH:mm:ss" value="#{auditoriaInsertController.selected.hora}" title="#{etiquetas.EditAuditoriaInsertTitle_hora}"  showOn="button"/>
+                                <p:tooltip for="hora" value="#{auditoriaInsertController.getComponentMessages('hora', etiquetas.EditAuditoriaInsertHelpText_hora)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditAuditoriaInsertLabel_usuario}" for="usuario" />
+                            <h:panelGroup>
+                                <p:inputText id="usuario" value="#{auditoriaInsertController.selected.usuario}" title="#{etiquetas.EditAuditoriaInsertTitle_usuario}" size="15" maxlength="15"/>
+                                <p:tooltip for="usuario" value="#{auditoriaInsertController.getComponentMessages('usuario', etiquetas.EditAuditoriaInsertHelpText_usuario)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{auditoriaInsertController.save}" value="#{etiquetas.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:AuditoriaInsertListPage:AuditoriaInsertListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:AuditoriaInsertListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

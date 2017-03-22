@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EstudianteCreateDlg" widgetVar="EstudianteCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{etiquetas.CreateEstudianteTitle}" closeOnEscape="true">
+
+            <h:form id="EstudianteCreateForm">
+
+                <h:panelGroup id="display" rendered="#{estudianteController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{etiquetas.CreateEstudianteLabel_nomEstudiante}" for="nomEstudiante" />
+                        <h:panelGroup>
+                            <p:inputText id="nomEstudiante" value="#{estudianteController.selected.nomEstudiante}" title="#{etiquetas.CreateEstudianteTitle_nomEstudiante}" required="true" requiredMessage="#{etiquetas.CreateEstudianteRequiredMessage_nomEstudiante}" size="45" maxlength="45"/>
+                            <p:tooltip for="nomEstudiante" value="#{estudianteController.getComponentMessages('nomEstudiante', etiquetas.CreateEstudianteHelpText_nomEstudiante)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.CreateEstudianteLabel_numTelefono}" for="numTelefono" />
+                        <h:panelGroup>
+                            <p:inputText id="numTelefono" value="#{estudianteController.selected.numTelefono}" title="#{etiquetas.CreateEstudianteTitle_numTelefono}"/>
+                            <p:tooltip for="numTelefono" value="#{estudianteController.getComponentMessages('numTelefono', etiquetas.CreateEstudianteHelpText_numTelefono)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.CreateEstudianteLabel_email}" for="email" />
+                        <h:panelGroup>
+                            <p:inputText id="email" value="#{estudianteController.selected.email}" title="#{etiquetas.CreateEstudianteTitle_email}" size="45" maxlength="45"/>
+                            <p:tooltip for="email" value="#{estudianteController.getComponentMessages('email', etiquetas.CreateEstudianteHelpText_email)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.CreateEstudianteLabel_fechaNacimiento}" for="fechaNacimiento" />
+                        <h:panelGroup>
+                            <p:calendar id="fechaNacimiento" pattern="MM/dd/yyyy" value="#{estudianteController.selected.fechaNacimiento}" title="#{etiquetas.CreateEstudianteTitle_fechaNacimiento}" required="true" requiredMessage="#{etiquetas.CreateEstudianteRequiredMessage_fechaNacimiento}" showOn="button"/>
+                            <p:tooltip for="fechaNacimiento" value="#{estudianteController.getComponentMessages('fechaNacimiento', etiquetas.CreateEstudianteHelpText_fechaNacimiento)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.CreateEstudianteLabel_lugarNacimiento}" for="lugarNacimiento" />
+                        <h:panelGroup>
+                            <p:inputText id="lugarNacimiento" value="#{estudianteController.selected.lugarNacimiento}" title="#{etiquetas.CreateEstudianteTitle_lugarNacimiento}" size="20" maxlength="20"/>
+                            <p:tooltip for="lugarNacimiento" value="#{estudianteController.getComponentMessages('lugarNacimiento', etiquetas.CreateEstudianteHelpText_lugarNacimiento)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.CreateEstudianteLabel_plantelAnterior}" for="plantelAnterior" />
+                        <h:panelGroup>
+                            <p:inputText id="plantelAnterior" value="#{estudianteController.selected.plantelAnterior}" title="#{etiquetas.CreateEstudianteTitle_plantelAnterior}" size="45" maxlength="45"/>
+                            <p:tooltip for="plantelAnterior" value="#{estudianteController.getComponentMessages('plantelAnterior', etiquetas.CreateEstudianteHelpText_plantelAnterior)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.CreateEstudianteLabel_cursoAnterior}" for="cursoAnterior" />
+                        <h:panelGroup>
+                            <p:inputText id="cursoAnterior" value="#{estudianteController.selected.cursoAnterior}" title="#{etiquetas.CreateEstudianteTitle_cursoAnterior}" size="10" maxlength="10"/>
+                            <p:tooltip for="cursoAnterior" value="#{estudianteController.getComponentMessages('cursoAnterior', etiquetas.CreateEstudianteHelpText_cursoAnterior)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.CreateEstudianteLabel_direccionDomicilio}" for="direccionDomicilio" />
+                        <h:panelGroup>
+                            <p:inputText id="direccionDomicilio" value="#{estudianteController.selected.direccionDomicilio}" title="#{etiquetas.CreateEstudianteTitle_direccionDomicilio}" required="true" requiredMessage="#{etiquetas.CreateEstudianteRequiredMessage_direccionDomicilio}" size="45" maxlength="45"/>
+                            <p:tooltip for="direccionDomicilio" value="#{estudianteController.getComponentMessages('direccionDomicilio', etiquetas.CreateEstudianteHelpText_direccionDomicilio)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.CreateEstudianteLabel_documentosIdDocumento}" for="documentosIdDocumento" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="documentosIdDocumento" value="#{estudianteController.selected.documentosIdDocumento}" required="true" requiredMessage="#{etiquetas.CreateEstudianteRequiredMessage_documentosIdDocumento}" converter="documentosConverter">
+                                <f:selectItem itemLabel="#{etiquetas.SelectOneMessage}"/>
+                                <f:selectItems value="#{documentosController.items}"
+                                               var="documentosIdDocumentoItem"
+                                               itemValue="#{documentosIdDocumentoItem}"
+                                               itemLabel="#{documentosIdDocumentoItem.idDocumentos.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                            <p:tooltip for="documentosIdDocumento" value="#{estudianteController.getComponentMessages('documentosIdDocumento', etiquetas.CreateEstudianteHelpText_documentosIdDocumento)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.CreateEstudianteLabel_padresTutoresIdPadresTutores}" for="padresTutoresIdPadresTutores" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="padresTutoresIdPadresTutores" value="#{estudianteController.selected.padresTutoresIdPadresTutores}" required="true" requiredMessage="#{etiquetas.CreateEstudianteRequiredMessage_padresTutoresIdPadresTutores}" converter="padresTutoresConverter">
+                                <f:selectItem itemLabel="#{etiquetas.SelectOneMessage}"/>
+                                <f:selectItems value="#{padresTutoresController.items}"
+                                               var="padresTutoresIdPadresTutoresItem"
+                                               itemValue="#{padresTutoresIdPadresTutoresItem}"
+                                               itemLabel="#{padresTutoresIdPadresTutoresItem.nombre.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                            <p:tooltip for="padresTutoresIdPadresTutores" value="#{estudianteController.getComponentMessages('padresTutoresIdPadresTutores', etiquetas.CreateEstudianteHelpText_padresTutoresIdPadresTutores)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{estudianteController.saveNew}" value="#{etiquetas.Save}" update="display,:EstudianteListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('EstudianteCreateDialog'));">
+                        <p:confirm header="#{etiquetas.ConfirmationHeader}" message="#{etiquetas.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{etiquetas.Cancel}" oncomplete="PF('EstudianteCreateDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

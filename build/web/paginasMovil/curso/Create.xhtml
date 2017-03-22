@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="CursoCreatePage" lazy="true">
+        <pm:header title="#{etiquetas.CreateCursoTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{etiquetas.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:CursoListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="CursoCreateForm">
+
+                <h:panelGroup id="display" rendered="#{cursoController.selected != null}">
+                    <p:outputPanel>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.CreateCursoLabel_nombreCurso}" for="nombreCurso" />
+                            <h:panelGroup>
+                                <p:inputText id="nombreCurso" value="#{cursoController.selected.nombreCurso}" title="#{etiquetas.CreateCursoTitle_nombreCurso}" size="10" maxlength="10"/>
+                                <p:tooltip for="nombreCurso" value="#{cursoController.getComponentMessages('nombreCurso', etiquetas.CreateCursoHelpText_nombreCurso)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{cursoController.saveNew}" value="#{etiquetas.Save}" update="display,:CursoListPage:CursoListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:CursoListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

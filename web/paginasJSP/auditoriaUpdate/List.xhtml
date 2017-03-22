@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="AuditoriaUpdateListForm">
+
+        <p:panel header="#{etiquetas.ListAuditoriaUpdateTitle}">
+            <p:contextMenu id="AuditoriaUpdateDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{etiquetas.Create}" onclick="document.getElementById('AuditoriaUpdateListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{etiquetas.View}" onclick="document.getElementById('AuditoriaUpdateListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{etiquetas.Edit}" onclick="document.getElementById('AuditoriaUpdateListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{etiquetas.Delete}" onclick="document.getElementById('AuditoriaUpdateListForm:deleteButton').click();" icon="ui-icon-trash"/>
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{auditoriaUpdateController.lazyItems}"
+                         lazy="true"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{auditoriaUpdateController.selected}">
+                <!--
+                         To disable Lazy Loading, please copy/replace the following lines above,
+                         and be sure to replace the word HASH with the # symbol:
+                
+                         value="HASH{auditoriaUpdateController.items}"
+                         lazy="false"
+                         rowKey="HASH{item.idAuditoria}"
+                -->
+
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:AuditoriaUpdateDataTableContextMenu"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:AuditoriaUpdateDataTableContextMenu"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('AuditoriaUpdateListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.idAuditoria}" filterBy="#{item.idAuditoria}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListAuditoriaUpdateTitle_idAuditoria}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idAuditoria}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.idCalificacion}" filterBy="#{item.idCalificacion}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListAuditoriaUpdateTitle_idCalificacion}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idCalificacion}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.fechaUpdate}" filterBy="#{item.fechaUpdate}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListAuditoriaUpdateTitle_fechaUpdate}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.fechaUpdate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                </p:column>
+
+
+                <p:column sortBy="#{item.hora}" filterBy="#{item.hora}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListAuditoriaUpdateTitle_hora}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.hora}">
+                        <f:convertDateTime pattern="HH:mm:ss" />
+                    </h:outputText>
+                </p:column>
+
+
+                <p:column sortBy="#{item.usuario}" filterBy="#{item.usuario}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListAuditoriaUpdateTitle_usuario}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.usuario}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{etiquetas.Create}" actionListener="#{auditoriaUpdateController.prepareCreate}" update=":AuditoriaUpdateCreateForm" oncomplete="PF('AuditoriaUpdateCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{etiquetas.View}" update=":AuditoriaUpdateViewForm" oncomplete="PF('AuditoriaUpdateViewDialog').show()" disabled="#{empty auditoriaUpdateController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{etiquetas.Edit}" update=":AuditoriaUpdateEditForm" oncomplete="PF('AuditoriaUpdateEditDialog').show()" disabled="#{empty auditoriaUpdateController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{etiquetas.Delete}" actionListener="#{auditoriaUpdateController.delete}" update=":growl,datalist" disabled="#{empty auditoriaUpdateController.selected}">
+                <p:confirm header="#{etiquetas.ConfirmationHeader}" message="#{etiquetas.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/paginasJSP/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

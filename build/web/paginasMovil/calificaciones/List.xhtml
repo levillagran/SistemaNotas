@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="CalificacionesListPage">
+        <pm:header title="#{etiquetas.ListCalificacionesTitle}">
+            <h:form>
+                <p:commandButton id="backButton"   styleClass="ui-btn-left  ui-btn-inline" icon="ui-icon-arrow-l" value="#{myBundle.Back}" action="#{mobilePageController.navigateBackInHistory('/paginasMovil/index')}"/>
+                <p:commandButton id="createButton" styleClass="ui-btn-right ui-btn-inline" icon="ui-icon-plus"    value="#{etiquetas.Create}" update=":CalificacionesCreatePage:CalificacionesCreateForm" actionListener="#{calificacionesController.prepareCreate}" action="#{mobilePageController.navigateWithHistory('pm:CalificacionesCreatePage')}">
+                    <f:actionListener binding="#{currentPageListener}"/>
+                </p:commandButton>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="CalificacionesListForm">
+
+                <p:dataList id="datalist"
+                            paginator="true"
+                            rows="10"
+                            rowsPerPageTemplate="10,20,30,40,50"
+                            pt:data-inset="true"
+                            value="#{calificacionesController.items}"
+                            var="item">
+
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListCalificacionesTitle}"/>
+                    </f:facet>
+
+                    <p:commandLink update=":CalificacionesEditPage:CalificacionesEditForm" action="pm:CalificacionesEditPage">
+                        <p>
+
+
+
+                            <h:outputText value="#{item.idCalificaciones}"/>
+
+
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.trabajos}"/>
+
+
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.actuacionIndividual}"/>
+
+
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.actividadGrupo}"/>
+
+
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.lecciones}"/>
+
+
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.suma}"/>
+
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.final1}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.parcialIdParcial.idParcial}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.cursoIdCurso.idCurso}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.paraleloIdParalelo.idParalelo}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.periodoIdPeriodo.idPeriodo}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.profesorIdProfesor.idProfesor}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.asignaturaIdAsignatura.idAsignatura}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.estudianteIdEstudiante.idEstudiante}"/>
+                            -->
+                        </p>
+                        <f:setPropertyActionListener value="#{item}" target="#{calificacionesController.selected}" />
+                    </p:commandLink>
+
+                    <f:facet name="footer">
+                        <h:outputText value="#{etiquetas.ListCalificacionesTitle}"/>
+                    </f:facet>
+
+                </p:dataList>
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

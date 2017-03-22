@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="PadresTutoresListForm">
+
+        <p:panel header="#{etiquetas.ListPadresTutoresTitle}">
+            <p:contextMenu id="PadresTutoresDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{etiquetas.Create}" onclick="document.getElementById('PadresTutoresListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{etiquetas.View}" onclick="document.getElementById('PadresTutoresListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{etiquetas.Edit}" onclick="document.getElementById('PadresTutoresListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{etiquetas.Delete}" onclick="document.getElementById('PadresTutoresListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{etiquetas.PadresTutoresMenuItem_estudianteCollection}" icon="ui-icon-search"  action="#{padresTutoresController.navigateEstudianteCollection}" disabled="#{empty padresTutoresController.selected.estudianteCollection}" ajax="false"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{padresTutoresController.lazyItems}"
+                         lazy="true"
+                         var="item"
+                         paginator="true"
+                         rows="13"
+                         rowsPerPageTemplate="13,26,39,42,55"
+                         selectionMode="single"
+                         selection="#{padresTutoresController.selected}">
+                <!--
+                         To disable Lazy Loading, please copy/replace the following lines above,
+                         and be sure to replace the word HASH with the # symbol:
+                
+                         value="HASH{padresTutoresController.items}"
+                         lazy="false"
+                         rowKey="HASH{item.idPadresTutores}"
+                -->
+
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:PadresTutoresDataTableContextMenu"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:PadresTutoresDataTableContextMenu"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('PadresTutoresListForm:viewButton').click();"/>
+
+<!--
+                <p:column sortBy="#{item.idPadresTutores}" filterBy="#{item.idPadresTutores}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListPadresTutoresTitle_idPadresTutores}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idPadresTutores}"/>
+                </p:column>
+-->
+
+                <p:column sortBy="#{item.genero}" filterBy="#{item.genero}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListPadresTutoresTitle_genero}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.genero}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.numCedula}" filterBy="#{item.numCedula}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListPadresTutoresTitle_numCedula}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.numCedula}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.nombre}" filterBy="#{item.nombre}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListPadresTutoresTitle_nombre}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nombre}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.numTelefono}" filterBy="#{item.numTelefono}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListPadresTutoresTitle_numTelefono}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.numTelefono}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.email}" filterBy="#{item.email}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListPadresTutoresTitle_email}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.email}"/>
+                </p:column>
+
+                
+                                    <p:column sortBy="#{item.profecion}" filterBy="#{item.profecion}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{etiquetas.ListPadresTutoresTitle_profecion}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.profecion}"/>
+                                    </p:column>
+                
+                
+                                    <p:column sortBy="#{item.lugarTrabajo}" filterBy="#{item.lugarTrabajo}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{etiquetas.ListPadresTutoresTitle_lugarTrabajo}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.lugarTrabajo}"/>
+                                    </p:column>
+                
+                
+                                    <p:column sortBy="#{item.direccionDomicilio}" filterBy="#{item.direccionDomicilio}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{etiquetas.ListPadresTutoresTitle_direccionDomicilio}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.direccionDomicilio}"/>
+                                    </p:column>
+                
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{etiquetas.Create}" actionListener="#{padresTutoresController.prepareCreate}" update=":PadresTutoresCreateForm" oncomplete="PF('PadresTutoresCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{etiquetas.View}" update=":PadresTutoresViewForm" oncomplete="PF('PadresTutoresViewDialog').show()" disabled="#{empty padresTutoresController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{etiquetas.Edit}" update=":PadresTutoresEditForm" oncomplete="PF('PadresTutoresEditDialog').show()" disabled="#{empty padresTutoresController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{etiquetas.Delete}" actionListener="#{padresTutoresController.delete}" update=":growl,datalist" disabled="#{empty padresTutoresController.selected}">
+                <p:confirm header="#{etiquetas.ConfirmationHeader}" message="#{etiquetas.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/paginasJSP/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="ParcialCreatePage" lazy="true">
+        <pm:header title="#{etiquetas.CreateParcialTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{etiquetas.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:ParcialListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="ParcialCreateForm">
+
+                <h:panelGroup id="display" rendered="#{parcialController.selected != null}">
+                    <p:outputPanel>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.CreateParcialLabel_nomParcial}" for="nomParcial" />
+                            <h:panelGroup>
+                                <p:inputText id="nomParcial" value="#{parcialController.selected.nomParcial}" title="#{etiquetas.CreateParcialTitle_nomParcial}" required="true" requiredMessage="#{etiquetas.CreateParcialRequiredMessage_nomParcial}" size="15" maxlength="15"/>
+                                <p:tooltip for="nomParcial" value="#{parcialController.getComponentMessages('nomParcial', etiquetas.CreateParcialHelpText_nomParcial)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{parcialController.saveNew}" value="#{etiquetas.Save}" update="display,:ParcialListPage:ParcialListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:ParcialListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

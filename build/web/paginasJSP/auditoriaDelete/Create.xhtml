@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AuditoriaDeleteCreateDlg" widgetVar="AuditoriaDeleteCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{etiquetas.CreateAuditoriaDeleteTitle}" closeOnEscape="true">
+
+            <h:form id="AuditoriaDeleteCreateForm">
+
+                <h:panelGroup id="display" rendered="#{auditoriaDeleteController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{etiquetas.CreateAuditoriaDeleteLabel_idCalificacion}" for="idCalificacion" />
+                        <h:panelGroup>
+                            <p:inputText id="idCalificacion" value="#{auditoriaDeleteController.selected.idCalificacion}" title="#{etiquetas.CreateAuditoriaDeleteTitle_idCalificacion}"/>
+                            <p:tooltip for="idCalificacion" value="#{auditoriaDeleteController.getComponentMessages('idCalificacion', etiquetas.CreateAuditoriaDeleteHelpText_idCalificacion)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.CreateAuditoriaDeleteLabel_fechaDelete}" for="fechaDelete" />
+                        <h:panelGroup>
+                            <p:calendar id="fechaDelete" pattern="MM/dd/yyyy" value="#{auditoriaDeleteController.selected.fechaDelete}" title="#{etiquetas.CreateAuditoriaDeleteTitle_fechaDelete}"  showOn="button"/>
+                            <p:tooltip for="fechaDelete" value="#{auditoriaDeleteController.getComponentMessages('fechaDelete', etiquetas.CreateAuditoriaDeleteHelpText_fechaDelete)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.CreateAuditoriaDeleteLabel_hora}" for="hora" />
+                        <h:panelGroup>
+                            <p:calendar id="hora" pattern="HH:mm:ss" value="#{auditoriaDeleteController.selected.hora}" title="#{etiquetas.CreateAuditoriaDeleteTitle_hora}"  showOn="button"/>
+                            <p:tooltip for="hora" value="#{auditoriaDeleteController.getComponentMessages('hora', etiquetas.CreateAuditoriaDeleteHelpText_hora)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.CreateAuditoriaDeleteLabel_usuario}" for="usuario" />
+                        <h:panelGroup>
+                            <p:inputText id="usuario" value="#{auditoriaDeleteController.selected.usuario}" title="#{etiquetas.CreateAuditoriaDeleteTitle_usuario}" size="15" maxlength="15"/>
+                            <p:tooltip for="usuario" value="#{auditoriaDeleteController.getComponentMessages('usuario', etiquetas.CreateAuditoriaDeleteHelpText_usuario)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{auditoriaDeleteController.saveNew}" value="#{etiquetas.Save}" update="display,:AuditoriaDeleteListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('AuditoriaDeleteCreateDialog'));">
+                        <p:confirm header="#{etiquetas.ConfirmationHeader}" message="#{etiquetas.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{etiquetas.Cancel}" oncomplete="PF('AuditoriaDeleteCreateDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

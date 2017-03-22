@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="AsignaturasListForm">
+
+        <p:panel header="#{etiquetas.ListAsignaturasTitle}">
+            <p:contextMenu id="AsignaturasDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{etiquetas.Create}" onclick="document.getElementById('AsignaturasListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{etiquetas.View}" onclick="document.getElementById('AsignaturasListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{etiquetas.Edit}" onclick="document.getElementById('AsignaturasListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{etiquetas.Delete}" onclick="document.getElementById('AsignaturasListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{etiquetas.AsignaturasMenuItem_calificacionesCollection}" icon="ui-icon-search"  action="#{asignaturasController.navigateCalificacionesCollection}" disabled="#{empty asignaturasController.selected.calificacionesCollection}" ajax="false"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{asignaturasController.lazyItems}"
+                         lazy="true"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{asignaturasController.selected}">
+                <!--
+                         To disable Lazy Loading, please copy/replace the following lines above,
+                         and be sure to replace the word HASH with the # symbol:
+                
+                         value="HASH{asignaturasController.items}"
+                         lazy="false"
+                         rowKey="HASH{item.idAsignatura}"
+                -->
+
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:AsignaturasDataTableContextMenu"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:AsignaturasDataTableContextMenu"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('AsignaturasListForm:viewButton').click();"/>
+<!--
+                <p:column sortBy="#{item.idAsignatura}" filterBy="#{item.idAsignatura}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListAsignaturasTitle_idAsignatura}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idAsignatura}"/>
+                </p:column>
+-->
+
+                <p:column sortBy="#{item.nomAsignatura}" filterBy="#{item.nomAsignatura}">
+                    <f:facet name="header">
+                        <h:outputText value="#{etiquetas.ListAsignaturasTitle_nomAsignatura}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nomAsignatura}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{etiquetas.Create}" actionListener="#{asignaturasController.prepareCreate}" update=":AsignaturasCreateForm" oncomplete="PF('AsignaturasCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{etiquetas.View}" update=":AsignaturasViewForm" oncomplete="PF('AsignaturasViewDialog').show()" disabled="#{empty asignaturasController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{etiquetas.Edit}" update=":AsignaturasEditForm" oncomplete="PF('AsignaturasEditDialog').show()" disabled="#{empty asignaturasController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{etiquetas.Delete}" actionListener="#{asignaturasController.delete}" update=":growl,datalist" disabled="#{empty asignaturasController.selected}">
+                <p:confirm header="#{etiquetas.ConfirmationHeader}" message="#{etiquetas.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/paginasJSP/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

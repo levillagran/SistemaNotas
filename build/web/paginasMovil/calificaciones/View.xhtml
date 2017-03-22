@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="CalificacionesViewPage" lazy="true">
+        <pm:header title="#{etiquetas.ViewCalificacionesTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{etiquetas.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:CalificacionesListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="CalificacionesViewForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{calificacionesController.selected != null}">
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewCalificacionesLabel_idCalificaciones}"/>
+                            <h:outputText value="#{calificacionesController.selected.idCalificaciones}" title="#{etiquetas.ViewCalificacionesTitle_idCalificaciones}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewCalificacionesLabel_trabajos}"/>
+                            <h:outputText value="#{calificacionesController.selected.trabajos}" title="#{etiquetas.ViewCalificacionesTitle_trabajos}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewCalificacionesLabel_actuacionIndividual}"/>
+                            <h:outputText value="#{calificacionesController.selected.actuacionIndividual}" title="#{etiquetas.ViewCalificacionesTitle_actuacionIndividual}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewCalificacionesLabel_actividadGrupo}"/>
+                            <h:outputText value="#{calificacionesController.selected.actividadGrupo}" title="#{etiquetas.ViewCalificacionesTitle_actividadGrupo}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewCalificacionesLabel_lecciones}"/>
+                            <h:outputText value="#{calificacionesController.selected.lecciones}" title="#{etiquetas.ViewCalificacionesTitle_lecciones}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewCalificacionesLabel_suma}"/>
+                            <h:outputText value="#{calificacionesController.selected.suma}" title="#{etiquetas.ViewCalificacionesTitle_suma}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewCalificacionesLabel_final1}"/>
+                            <h:outputText value="#{calificacionesController.selected.final1}" title="#{etiquetas.ViewCalificacionesTitle_final1}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewCalificacionesLabel_parcialIdParcial}"/>
+                            <h:outputText value="#{calificacionesController.selected.parcialIdParcial.idParcial}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewCalificacionesLabel_cursoIdCurso}"/>
+                            <h:outputText value="#{calificacionesController.selected.cursoIdCurso.idCurso}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewCalificacionesLabel_paraleloIdParalelo}"/>
+                            <h:outputText value="#{calificacionesController.selected.paraleloIdParalelo.idParalelo}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewCalificacionesLabel_periodoIdPeriodo}"/>
+                            <h:outputText value="#{calificacionesController.selected.periodoIdPeriodo.idPeriodo}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewCalificacionesLabel_profesorIdProfesor}"/>
+                            <h:outputText value="#{calificacionesController.selected.profesorIdProfesor.idProfesor}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewCalificacionesLabel_asignaturaIdAsignatura}"/>
+                            <h:outputText value="#{calificacionesController.selected.asignaturaIdAsignatura.idAsignatura}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewCalificacionesLabel_estudianteIdEstudiante}"/>
+                            <h:outputText value="#{calificacionesController.selected.estudianteIdEstudiante.idEstudiante}"/>
+                        </pm:field>
+                    </p:outputPanel>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

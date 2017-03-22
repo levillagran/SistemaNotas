@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="UsuariosViewPage" lazy="true">
+        <pm:header title="#{etiquetas.ViewUsuariosTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{etiquetas.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:UsuariosListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="UsuariosViewForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{usuariosController.selected != null}">
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewUsuariosLabel_id}"/>
+                            <h:outputText value="#{usuariosController.selected.id}" title="#{etiquetas.ViewUsuariosTitle_id}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewUsuariosLabel_usuario}"/>
+                            <h:outputText value="#{usuariosController.selected.usuario}" title="#{etiquetas.ViewUsuariosTitle_usuario}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewUsuariosLabel_clave}"/>
+                            <h:outputText value="#{usuariosController.selected.clave}" title="#{etiquetas.ViewUsuariosTitle_clave}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewUsuariosLabel_nivelAcceso}"/>
+                            <h:outputText value="#{usuariosController.selected.nivelAcceso}" title="#{etiquetas.ViewUsuariosTitle_nivelAcceso}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewUsuariosLabel_fechaEgistro}"/>
+                            <h:outputText value="#{usuariosController.selected.fechaEgistro}" title="#{etiquetas.ViewUsuariosTitle_fechaEgistro}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewUsuariosLabel_estudianteIdEstudiante}"/>
+                            <h:outputText value="#{usuariosController.selected.estudianteIdEstudiante.idEstudiante}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{etiquetas.ViewUsuariosLabel_profesorIdProfesor}"/>
+                            <h:outputText value="#{usuariosController.selected.profesorIdProfesor.idProfesor}"/>
+                        </pm:field>
+                    </p:outputPanel>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

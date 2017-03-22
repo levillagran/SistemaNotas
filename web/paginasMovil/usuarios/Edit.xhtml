@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="UsuariosEditPage" lazy="true">
+        <pm:header title="#{etiquetas.EditUsuariosTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{etiquetas.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:UsuariosListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="UsuariosEditForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{usuariosController.selected != null}">
+
+                        <pm:field>
+                            <h:outputLabel value="#{etiquetas.EditUsuariosLabel_id}" for="id" />
+                            <h:panelGroup>
+                                <h:outputText id="id" value="#{usuariosController.selected.id}" />
+                                <p:tooltip for="id" value="#{usuariosController.getComponentMessages('id', etiquetas.EditUsuariosHelpText_id)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditUsuariosLabel_usuario}" for="usuario" />
+                            <h:panelGroup>
+                                <p:inputText id="usuario" value="#{usuariosController.selected.usuario}" title="#{etiquetas.EditUsuariosTitle_usuario}" required="true" requiredMessage="#{etiquetas.EditUsuariosRequiredMessage_usuario}" size="45" maxlength="45"/>
+                                <p:tooltip for="usuario" value="#{usuariosController.getComponentMessages('usuario', etiquetas.EditUsuariosHelpText_usuario)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditUsuariosLabel_clave}" for="clave" />
+                            <h:panelGroup>
+                                <p:inputText id="clave" value="#{usuariosController.selected.clave}" title="#{etiquetas.EditUsuariosTitle_clave}" required="true" requiredMessage="#{etiquetas.EditUsuariosRequiredMessage_clave}" size="45" maxlength="45"/>
+                                <p:tooltip for="clave" value="#{usuariosController.getComponentMessages('clave', etiquetas.EditUsuariosHelpText_clave)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditUsuariosLabel_nivelAcceso}" for="nivelAcceso" />
+                            <h:panelGroup>
+                                <p:inputText id="nivelAcceso" value="#{usuariosController.selected.nivelAcceso}" title="#{etiquetas.EditUsuariosTitle_nivelAcceso}" required="true" requiredMessage="#{etiquetas.EditUsuariosRequiredMessage_nivelAcceso}"/>
+                                <p:tooltip for="nivelAcceso" value="#{usuariosController.getComponentMessages('nivelAcceso', etiquetas.EditUsuariosHelpText_nivelAcceso)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditUsuariosLabel_fechaEgistro}" for="fechaEgistro" />
+                            <h:panelGroup>
+                                <p:calendar id="fechaEgistro" pattern="MM/dd/yyyy" value="#{usuariosController.selected.fechaEgistro}" title="#{etiquetas.EditUsuariosTitle_fechaEgistro}" required="true" requiredMessage="#{etiquetas.EditUsuariosRequiredMessage_fechaEgistro}" showOn="button"/>
+                                <p:tooltip for="fechaEgistro" value="#{usuariosController.getComponentMessages('fechaEgistro', etiquetas.EditUsuariosHelpText_fechaEgistro)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditUsuariosLabel_estudianteIdEstudiante}" for="estudianteIdEstudiante" />
+                            <h:panelGroup>
+                                <p:selectOneMenu id="estudianteIdEstudiante" value="#{usuariosController.selected.estudianteIdEstudiante}"  converter="estudianteConverter">
+                                    <f:selectItem itemLabel="#{etiquetas.SelectOneMessage}"/>
+                                    <f:selectItems value="#{estudianteController.items}"
+                                                   var="estudianteIdEstudianteItem"
+                                                   itemValue="#{estudianteIdEstudianteItem}"
+                                                   itemLabel="#{estudianteIdEstudianteItem.idEstudiante.toString()}"
+                                                   />
+
+                                </p:selectOneMenu>
+                                <p:tooltip for="estudianteIdEstudiante" value="#{usuariosController.getComponentMessages('estudianteIdEstudiante', etiquetas.EditUsuariosHelpText_estudianteIdEstudiante)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{etiquetas.EditUsuariosLabel_profesorIdProfesor}" for="profesorIdProfesor" />
+                            <h:panelGroup>
+                                <p:selectOneMenu id="profesorIdProfesor" value="#{usuariosController.selected.profesorIdProfesor}"  converter="profesorConverter">
+                                    <f:selectItem itemLabel="#{etiquetas.SelectOneMessage}"/>
+                                    <f:selectItems value="#{profesorController.items}"
+                                                   var="profesorIdProfesorItem"
+                                                   itemValue="#{profesorIdProfesorItem}"
+                                                   itemLabel="#{profesorIdProfesorItem.idProfesor.toString()}"
+                                                   />
+
+                                </p:selectOneMenu>
+                                <p:tooltip for="profesorIdProfesor" value="#{usuariosController.getComponentMessages('profesorIdProfesor', etiquetas.EditUsuariosHelpText_profesorIdProfesor)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{usuariosController.save}" value="#{etiquetas.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:UsuariosListPage:UsuariosListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:UsuariosListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

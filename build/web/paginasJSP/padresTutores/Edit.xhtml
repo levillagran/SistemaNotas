@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="PadresTutoresEditDlg" widgetVar="PadresTutoresEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{etiquetas.EditPadresTutoresTitle}" closeOnEscape="true">
+
+            <h:form id="PadresTutoresEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{padresTutoresController.selected != null}">
+
+
+                        <h:outputLabel value="#{etiquetas.EditPadresTutoresLabel_idPadresTutores}" for="idPadresTutores" />
+                        <h:panelGroup>
+                            <h:outputText id="idPadresTutores" value="#{padresTutoresController.selected.idPadresTutores}" />
+                            <p:tooltip for="idPadresTutores" value="#{padresTutoresController.getComponentMessages('idPadresTutores', etiquetas.EditPadresTutoresHelpText_idPadresTutores)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.EditPadresTutoresLabel_genero}" for="genero" />
+                        <h:panelGroup>
+                            <p:inputText id="genero" value="#{padresTutoresController.selected.genero}" title="#{etiquetas.EditPadresTutoresTitle_genero}" size="10" maxlength="10"/>
+                            <p:tooltip for="genero" value="#{padresTutoresController.getComponentMessages('genero', etiquetas.EditPadresTutoresHelpText_genero)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.EditPadresTutoresLabel_numCedula}" for="numCedula" />
+                        <h:panelGroup>
+                            <p:inputText id="numCedula" value="#{padresTutoresController.selected.numCedula}" title="#{etiquetas.EditPadresTutoresTitle_numCedula}" required="true" requiredMessage="#{etiquetas.EditPadresTutoresRequiredMessage_numCedula}"/>
+                            <p:tooltip for="numCedula" value="#{padresTutoresController.getComponentMessages('numCedula', etiquetas.EditPadresTutoresHelpText_numCedula)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.EditPadresTutoresLabel_nombre}" for="nombre" />
+                        <h:panelGroup>
+                            <p:inputText id="nombre" value="#{padresTutoresController.selected.nombre}" title="#{etiquetas.EditPadresTutoresTitle_nombre}" required="true" requiredMessage="#{etiquetas.EditPadresTutoresRequiredMessage_nombre}" size="50" maxlength="50"/>
+                            <p:tooltip for="nombre" value="#{padresTutoresController.getComponentMessages('nombre', etiquetas.EditPadresTutoresHelpText_nombre)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.EditPadresTutoresLabel_numTelefono}" for="numTelefono" />
+                        <h:panelGroup>
+                            <p:inputText id="numTelefono" value="#{padresTutoresController.selected.numTelefono}" title="#{etiquetas.EditPadresTutoresTitle_numTelefono}" required="true" requiredMessage="#{etiquetas.EditPadresTutoresRequiredMessage_numTelefono}"/>
+                            <p:tooltip for="numTelefono" value="#{padresTutoresController.getComponentMessages('numTelefono', etiquetas.EditPadresTutoresHelpText_numTelefono)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.EditPadresTutoresLabel_email}" for="email" />
+                        <h:panelGroup>
+                            <p:inputText id="email" value="#{padresTutoresController.selected.email}" title="#{etiquetas.EditPadresTutoresTitle_email}" required="true" requiredMessage="#{etiquetas.EditPadresTutoresRequiredMessage_email}" size="45" maxlength="45"/>
+                            <p:tooltip for="email" value="#{padresTutoresController.getComponentMessages('email', etiquetas.EditPadresTutoresHelpText_email)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.EditPadresTutoresLabel_profecion}" for="profecion" />
+                        <h:panelGroup>
+                            <p:inputText id="profecion" value="#{padresTutoresController.selected.profecion}" title="#{etiquetas.EditPadresTutoresTitle_profecion}" size="15" maxlength="15"/>
+                            <p:tooltip for="profecion" value="#{padresTutoresController.getComponentMessages('profecion', etiquetas.EditPadresTutoresHelpText_profecion)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.EditPadresTutoresLabel_lugarTrabajo}" for="lugarTrabajo" />
+                        <h:panelGroup>
+                            <p:inputText id="lugarTrabajo" value="#{padresTutoresController.selected.lugarTrabajo}" title="#{etiquetas.EditPadresTutoresTitle_lugarTrabajo}" size="45" maxlength="45"/>
+                            <p:tooltip for="lugarTrabajo" value="#{padresTutoresController.getComponentMessages('lugarTrabajo', etiquetas.EditPadresTutoresHelpText_lugarTrabajo)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.EditPadresTutoresLabel_direccionDomicilio}" for="direccionDomicilio" />
+                        <h:panelGroup>
+                            <p:inputText id="direccionDomicilio" value="#{padresTutoresController.selected.direccionDomicilio}" title="#{etiquetas.EditPadresTutoresTitle_direccionDomicilio}" required="true" requiredMessage="#{etiquetas.EditPadresTutoresRequiredMessage_direccionDomicilio}" size="60" maxlength="60"/>
+                            <p:tooltip for="direccionDomicilio" value="#{padresTutoresController.getComponentMessages('direccionDomicilio', etiquetas.EditPadresTutoresHelpText_direccionDomicilio)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{padresTutoresController.save}" value="#{etiquetas.Save}" update="display,:PadresTutoresListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('PadresTutoresEditDialog'));">
+                        <p:confirm header="#{etiquetas.ConfirmationHeader}" message="#{etiquetas.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{etiquetas.Cancel}" oncomplete="PF('PadresTutoresEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

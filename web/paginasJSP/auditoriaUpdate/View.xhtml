@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AuditoriaUpdateViewDlg" widgetVar="AuditoriaUpdateViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{etiquetas.ViewAuditoriaUpdateTitle}" closeOnEscape="true">
+
+            <h:form id="AuditoriaUpdateViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{auditoriaUpdateController.selected != null}">
+
+                        <h:outputText value="#{etiquetas.ViewAuditoriaUpdateLabel_idAuditoria}"/>
+                        <h:outputText value="#{auditoriaUpdateController.selected.idAuditoria}" title="#{etiquetas.ViewAuditoriaUpdateTitle_idAuditoria}"/>
+
+                        <h:outputText value="#{etiquetas.ViewAuditoriaUpdateLabel_idCalificacion}"/>
+                        <h:outputText value="#{auditoriaUpdateController.selected.idCalificacion}" title="#{etiquetas.ViewAuditoriaUpdateTitle_idCalificacion}"/>
+
+                        <h:outputText value="#{etiquetas.ViewAuditoriaUpdateLabel_fechaUpdate}"/>
+                        <h:outputText value="#{auditoriaUpdateController.selected.fechaUpdate}" title="#{etiquetas.ViewAuditoriaUpdateTitle_fechaUpdate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+
+                        <h:outputText value="#{etiquetas.ViewAuditoriaUpdateLabel_hora}"/>
+                        <h:outputText value="#{auditoriaUpdateController.selected.hora}" title="#{etiquetas.ViewAuditoriaUpdateTitle_hora}">
+                            <f:convertDateTime pattern="HH:mm:ss" />
+                        </h:outputText>
+
+                        <h:outputText value="#{etiquetas.ViewAuditoriaUpdateLabel_usuario}"/>
+                        <h:outputText value="#{auditoriaUpdateController.selected.usuario}" title="#{etiquetas.ViewAuditoriaUpdateTitle_usuario}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{etiquetas.Close}" onclick="PF('AuditoriaUpdateViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

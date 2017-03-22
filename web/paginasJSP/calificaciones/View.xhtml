@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CalificacionesViewDlg" widgetVar="CalificacionesViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{etiquetas.ViewCalificacionesTitle}" closeOnEscape="true">
+
+            <h:form id="CalificacionesViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{calificacionesController.selected != null}">
+
+                        <h:outputText value="#{etiquetas.ViewCalificacionesLabel_idCalificaciones}"/>
+                        <h:outputText value="#{calificacionesController.selected.idCalificaciones}" title="#{etiquetas.ViewCalificacionesTitle_idCalificaciones}"/>
+
+                        <h:outputText value="#{etiquetas.ViewCalificacionesLabel_trabajos}"/>
+                        <h:outputText value="#{calificacionesController.selected.trabajos}" title="#{etiquetas.ViewCalificacionesTitle_trabajos}"/>
+
+                        <h:outputText value="#{etiquetas.ViewCalificacionesLabel_actuacionIndividual}"/>
+                        <h:outputText value="#{calificacionesController.selected.actuacionIndividual}" title="#{etiquetas.ViewCalificacionesTitle_actuacionIndividual}"/>
+
+                        <h:outputText value="#{etiquetas.ViewCalificacionesLabel_actividadGrupo}"/>
+                        <h:outputText value="#{calificacionesController.selected.actividadGrupo}" title="#{etiquetas.ViewCalificacionesTitle_actividadGrupo}"/>
+
+                        <h:outputText value="#{etiquetas.ViewCalificacionesLabel_lecciones}"/>
+                        <h:outputText value="#{calificacionesController.selected.lecciones}" title="#{etiquetas.ViewCalificacionesTitle_lecciones}"/>
+
+                        <h:outputText value="#{etiquetas.ViewCalificacionesLabel_suma}"/>
+                        <h:outputText value="#{calificacionesController.selected.suma}" title="#{etiquetas.ViewCalificacionesTitle_suma}"/>
+
+                        <h:outputText value="#{etiquetas.ViewCalificacionesLabel_final1}"/>
+                        <h:outputText value="#{calificacionesController.selected.final1}" title="#{etiquetas.ViewCalificacionesTitle_final1}"/>
+
+                        <h:outputText value="#{etiquetas.ViewCalificacionesLabel_parcialIdParcial}"/>
+                        <h:outputText value="#{calificacionesController.selected.parcialIdParcial.idParcial}"/>
+
+                        <h:outputText value="#{etiquetas.ViewCalificacionesLabel_cursoIdCurso}"/>
+                        <h:outputText value="#{calificacionesController.selected.cursoIdCurso.idCurso}"/>
+
+                        <h:outputText value="#{etiquetas.ViewCalificacionesLabel_paraleloIdParalelo}"/>
+                        <h:outputText value="#{calificacionesController.selected.paraleloIdParalelo.idParalelo}"/>
+
+                        <h:outputText value="#{etiquetas.ViewCalificacionesLabel_periodoIdPeriodo}"/>
+                        <h:outputText value="#{calificacionesController.selected.periodoIdPeriodo.idPeriodo}"/>
+
+                        <h:outputText value="#{etiquetas.ViewCalificacionesLabel_profesorIdProfesor}"/>
+                        <h:outputText value="#{calificacionesController.selected.profesorIdProfesor.idProfesor}"/>
+
+                        <h:outputText value="#{etiquetas.ViewCalificacionesLabel_asignaturaIdAsignatura}"/>
+                        <h:outputText value="#{calificacionesController.selected.asignaturaIdAsignatura.idAsignatura}"/>
+
+                        <h:outputText value="#{etiquetas.ViewCalificacionesLabel_estudianteIdEstudiante}"/>
+                        <h:outputText value="#{calificacionesController.selected.estudianteIdEstudiante.idEstudiante}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{etiquetas.Close}" onclick="PF('CalificacionesViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

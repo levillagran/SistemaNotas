@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <h:form id="menuForm">
+            <p:menubar  >
+                <p:menuitem value="Salir" outcome="/index" icon="ui-icon-home" style="font-size: medium"/>
+                <p:separator/>
+                <p:menuitem value="#{etiquetas.PadresTutoresHeading}" outcome="/paginasJSP/padresTutores/index" icon="ui-icon-person" style="font-size: medium"/>
+                <p:menuitem value="#{etiquetas.DocumentosHeading}" outcome="/paginasJSP/documentos/index" icon="ui-icon-document" style="font-size: medium"/>
+                <p:menuitem value="#{etiquetas.EstudianteHeading}" outcome="/paginasJSP/estudiante/index" icon="ui-icon-person" style="font-size: medium"/>
+                <p:separator/>
+                <p:menuitem value="#{etiquetas.CalificacionesHeading}" outcome="/paginasJSP/calificaciones/index" icon="ui-icon-pencil" style="font-size: medium" />
+                <p:separator/>
+                <p:menuitem value="#{etiquetas.ProfesorHeading}" outcome="/paginasJSP/profesor/index" icon="ui-icon-person" style="font-size: medium"/>
+                <p:menuitem value="#{etiquetas.AsignaturasHeading}" outcome="/paginasJSP/asignaturas/index" icon="ui-icon-clipboard" style="font-size: medium"/>
+                <p:separator/>
+                <p:menuitem value="#{etiquetas.ParcialHeading}" outcome="/paginasJSP/parcial/index" icon="ui-icon-calendar" style="font-size: medium"/>
+                <p:menuitem value="#{etiquetas.PeriodoHeading}" outcome="/paginasJSP/periodo/index" icon="ui-icon-calendar" style="font-size: medium"/>
+                <p:menuitem value="#{etiquetas.CursoHeading}" outcome="/paginasJSP/curso/index" icon="ui-icon-tag" style="font-size: medium"/>
+                <p:menuitem value="#{etiquetas.ParaleloHeading}" outcome="/paginasJSP/paralelo/index" icon="ui-icon-tag" style="font-size: medium"/>
+                <p:separator/>
+                <p:menuitem value="Administrar Usuarios" outcome="/paginasJSP/usuarios/index" icon="ui-icon-unlocked" style="font-size: medium"/>
+                <p:separator/>
+                <p:submenu label="Control Auditoria" icon="ui-icon-search" style="font-size: medium">
+                    <p:menuitem value="Auditoria De Eliminacion" outcome="/paginasJSP/auditoriaDelete/index" icon="ui-icon-search" style="font-size: medium"/>
+                    <p:menuitem value="Auditoria De Insercion" outcome="/paginasJSP/auditoriaInsert/index" icon="ui-icon-search" style="font-size: medium" />
+                    <p:menuitem value="Auditoria De Modificacion" outcome="/paginasJSP/auditoriaUpdate/index" icon="ui-icon-search" style="font-size: medium"/>
+                </p:submenu>
+
+            </p:menubar>
+        </h:form>
+    </ui:composition>
+
+</html>

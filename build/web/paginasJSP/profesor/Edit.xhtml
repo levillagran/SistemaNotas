@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="ProfesorEditDlg" widgetVar="ProfesorEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{etiquetas.EditProfesorTitle}" closeOnEscape="true">
+
+            <h:form id="ProfesorEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{profesorController.selected != null}">
+
+
+                        <h:outputLabel value="#{etiquetas.EditProfesorLabel_idProfesor}" for="idProfesor" />
+                        <h:panelGroup>
+                            <h:outputText id="idProfesor" value="#{profesorController.selected.idProfesor}" />
+                            <p:tooltip for="idProfesor" value="#{profesorController.getComponentMessages('idProfesor', etiquetas.EditProfesorHelpText_idProfesor)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{etiquetas.EditProfesorLabel_nomProfesor}" for="nomProfesor" />
+                        <h:panelGroup>
+                            <p:inputText id="nomProfesor" value="#{profesorController.selected.nomProfesor}" title="#{etiquetas.EditProfesorTitle_nomProfesor}" required="true" requiredMessage="#{etiquetas.EditProfesorRequiredMessage_nomProfesor}" size="45" maxlength="45"/>
+                            <p:tooltip for="nomProfesor" value="#{profesorController.getComponentMessages('nomProfesor', etiquetas.EditProfesorHelpText_nomProfesor)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{profesorController.save}" value="#{etiquetas.Save}" update="display,:ProfesorListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('ProfesorEditDialog'));">
+                        <p:confirm header="#{etiquetas.ConfirmationHeader}" message="#{etiquetas.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{etiquetas.Cancel}" oncomplete="PF('ProfesorEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>
